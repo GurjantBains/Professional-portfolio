@@ -5,6 +5,12 @@ import {Link} from "react-router-dom";
 export function Navbar() {
     let a = " text-xl hover:scale-95  transition-all cursor-pointer px-10 py-4" +
         "  duration-500  hover:bg-white text-black active:scale-105 rounded-4xl "
+    let b =({ isActive }) => ({
+        color:isActive ? "white" : "black",
+        backgroundColor: isActive ? "black" : "transparent",
+        fontWeight: isActive ? "bold" : "normal",
+
+    });
 
     return (
         <>
@@ -16,14 +22,11 @@ export function Navbar() {
             {/*<div className={a}> Home</div>*/}
             {/*<Link to="/About" className={a}> About</Link>*/}
 
-
-            <NavLink to="/" style={({ isActive }) => ({
-                color:isActive ? "white" : "black",
-            })} className={a+" "}> Home</NavLink>
-            <NavLink to="/Skills" className={a}> Skills</NavLink>
-            <NavLink to="/Projects" className={a}> Projects</NavLink>
+            <NavLink to="/"  style={b} className={a+" "}> Home</NavLink>
+            <NavLink to="/Skills" style={b} className={a}> Skills</NavLink>
+            <NavLink to="/Projects" style={b} className={a}> Projects</NavLink>
             <div className={a}> Home</div>
-            <NavLink to="/About" className={a}> About</NavLink>
+            <NavLink to="/About" style={b} className={a}> About</NavLink>
 
         </div>
             </div>
