@@ -4,6 +4,7 @@ export function Projects() {
     return (
         <>
             <Navbar />
+
         hlo
         </>
     )

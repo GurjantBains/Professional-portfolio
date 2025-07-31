@@ -7,3 +7,7 @@
     /*background-color: rgba(198, 194, 194, 0.66);*/
     background-color: var(--bg-nav-color);
 }
+.navLink-bg{
+    background-color: black;
+    left: 0;
+}

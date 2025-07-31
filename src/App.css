@@ -1,1 +1,68 @@
 @import "tailwindcss";
+:root{
+    --hero-text:30px;
+    --hero-title:70px;
+    --hero-description:20px;
+    --skill-home-title:80px;
+}
+@media (width<600px){
+    .skillCard-container{
+        flex-direction: column !important;
+        background-color: red;
+    }
+    
+}
+
+.heroText{
+    font-size:var(--hero-text) ;
+}
+.heroTitle{
+     font-size:var(--hero-title) ;
+
+ }
+.heroContainer{
+    height:750px;
+}
+.heroDescription{
+    font-size:var(--hero-description) ;
+}
+.heroBgImg{
+    position:absolute;
+    width: 100%;
+    height: 900px;
+    background-image: url("/heroImg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+    top:0;
+    left:0;
+    opacity: 0.67;
+}
+.heroImg:hover{
+
+    /*position: absolute;*/
+    /*bottom: -100px;*/
+
+}
+.skillHome{
+    z-index: -1;
+    min-height: 404px;
+
+}
+.skill-home-heading{
+    font-size:var(--skill-home-title) ;
+}
+.skillCard{
+    min-width: 300px;
+    /*border:10px solid red;*/
+    /*box-shadow: 10px 10px 4px rgba(255, 0, 0, 0.3);*/
+}
+.project-container{
+
+}
+.custom-class{
+    padding: 0px !important;
+    padding-inline: 0;
+    padding-block: 0;
+}

@@ -3,6 +3,7 @@ export function Skills() {
     return (
         <>
             <Navbar/>
+
         </>
     )
 }
