@@ -18,7 +18,7 @@ export function Navbar() {
 
     return (
         <>
-            <div className={"flex items-center justify-center p-8 sticky "}>
+            <div className={"flex items-center justify-center p-8 absolute w-full z-100"}>
         <motion.div
            animate={{
                top:"0px",

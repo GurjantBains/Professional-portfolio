@@ -3,7 +3,9 @@
     --hero-text:30px;
     --hero-title:70px;
     --hero-description:20px;
-    --skill-home-title:80px;
+    --home-title:80px;
+    --project-home-title:30px;
+    --project-home-description:15px;
 }
 @media (width<600px){
     .skillCard-container{
@@ -21,7 +23,7 @@
 
  }
 .heroContainer{
-    height:750px;
+    height:980px;
 }
 .heroDescription{
     font-size:var(--hero-description) ;
@@ -29,7 +31,7 @@
 .heroBgImg{
     position:absolute;
     width: 100%;
-    height: 900px;
+    height: 980px;
     background-image: url("/heroImg.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -51,18 +53,59 @@
 
 }
 .skill-home-heading{
-    font-size:var(--skill-home-title) ;
+    font-size:var(--home-title) ;
 }
 .skillCard{
     min-width: 300px;
     /*border:10px solid red;*/
     /*box-shadow: 10px 10px 4px rgba(255, 0, 0, 0.3);*/
 }
-.project-container{
+.project-Home{
+    background-color: #212121;
+}
 
+.project-title{
+    font-size:var(--hero-title) ;
+}
+.project-container{
+    background-color: rgba(237,112,93,0.88);
+    /*background-color: white;*/
 }
 .custom-class{
-    padding: 0px !important;
+    padding: 0 !important;
     padding-inline: 0;
     padding-block: 0;
 }
+.project-heading-middle{
+    font-size:var(--project-home-title);
+}
+.project-left{
+    max-width:200px ;
+    height: 200px;
+    box-shadow: 10px 4px 8px 0 rgba(255, 255, 255, 0.2) , 0 6px 20px 0 rgba(255, 0, 0, 0.19),
+0 6px 20px 0 rgba(255, 0, 0, 0.23);
+    background-color: #fff;
+}
+.project-Home-desc {
+    font-size: var(--project-home-description);
+}
+/* Circle.css */
+.circle {
+    width: 250px;
+    height: 250px;
+    background-color: #4f46e5; /* Indigo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    place-self: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.circleElement{
+    width: 150px;
+    height: 150px;
+    background: #000;
+}
+

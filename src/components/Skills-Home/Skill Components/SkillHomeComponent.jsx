@@ -9,10 +9,9 @@ export function SkillHomeComponent(prop) {
 
             <StarBorder
                 as="button"
-                className="custom-class"
+                className="custom-class m-2"
                 color="cyan"
                 speed="5s"
-                classname={"border-10"}
             >
 
             <motion.div className={"skillCard flex z-0 flex-col justify-between  gap-3 items-center bg-white" +
