@@ -37,11 +37,11 @@ export function ProjectHome() {
                  <Project  title={"Wordpress Theme"}
                            desc={"Made full replica of Wordpress Theme"}
                            tags={["Front-End","HTML","CSS","Bootstrap"]}
-                           img={"Project1/Project1.png"}
-                           img1={"Project1/Project1-1.png"}
-                           img2={"Project1/Project1-2.png"}
+                           img={"Project2/Project2.png"}
+                           img1={"Project2/Project2-1.png"}
+                           img2={"Project2/Project2-2.png"}
                            reff={mainDivRef}
-                           bg={'Project1/Project1-bg.png'}
+                           bg={'Project2/Project2-bg.png'}
                  />
 
 
