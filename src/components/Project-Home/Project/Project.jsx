@@ -1,6 +1,5 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {motion} from "motion/react";
-import {useState} from "react";
 import CustomButton from "@/components/Skills-Home/SkillsHome.jsx";
 
 export default function Project(prop) {
@@ -11,13 +10,27 @@ export default function Project(prop) {
     const [middlePos, setMiddlePos] = useState(0);
     const [button, setButton] = useState(-50);
     const [display, setDisplay] = useState("none");
-    const reff = prop.reff
+    const [canHover, setCanHover] = useState(true)
+    const reff = prop.reff;
+
+    const [initial, setInitial] = useState({opacity:0,x:-300});
+    const [animate, setAnimate] = useState({opacity:1,x:0});
+    const [animation, setAnimation] = useState(initial);
+
+
+    // const bg = prop.bg1
 
     return (
         <>
             <motion.div className={"project-container place-self-center p-10  content-center" +
-                "gap-5 flex flex-col justify-between  rounded-2xl opacity-90 "}
+                "gap-5 flex flex-col justify-between  rounded-2xl opacity-90  z-10"}
+                        style={{...{backgroundColor:"#2D2A32"},...initial}}
+                        animate={{...animation,...{transition:{duration:0.8,delay:0.3}}}}
+                        whileHover={{backgroundColor:"#615f68", scale:1.1}}
+                        onViewportEnter={()=>{setAnimation(animate)}}
+                        
             onMouseEnter={() => {
+                if(!canHover)return
                 setOpacity(1);
                 setLeftPosition(-300);
                 setRightPosition(350);
@@ -26,9 +39,11 @@ export default function Project(prop) {
                 setButton(0)
                 setDisplay("flex")
                 reff.current.style.backgroundImage=`url(${prop.bg})`
-                console.log(reff)
-            }}
+                const mainPos = reff.current.getBoundingClientRect();
+                reff.current.style.backgroundPositionY = mainPos.top*-1 + "px";
+                }}
                         onMouseLeave={()=>{
+                            if(!canHover)return
                             setOpacity(0);
                             setLeftPosition(0);
                             setRightPosition(0);
@@ -39,7 +54,8 @@ export default function Project(prop) {
                             reff.current.style.backgroundImage=``
 
 
-
+                            setCanHover(false)
+                            setTimeout(()=>setCanHover(true),300)
                         }}
             >
 
@@ -47,6 +63,7 @@ export default function Project(prop) {
                     animate={{
                         top:middlePos,
                     }}
+
                     className={"relative project-small gap-5 flex flex-col justify-between z-1"}>
                     <div className={"project-image-middle"}>
                     <img src={prop.img}
@@ -115,6 +132,7 @@ export default function Project(prop) {
                     classname={"absolute top-0"}
 
                 />
+
             </motion.div>
             </motion.div>
         </>

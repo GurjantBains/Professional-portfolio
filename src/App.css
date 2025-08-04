@@ -6,6 +6,9 @@
     --home-title:80px;
     --project-home-title:30px;
     --project-home-description:15px;
+    --bg-1:#181d26;
+
+    --skill-page-card-title:30px;
 }
 @media (width<600px){
     .skillCard-container{
@@ -14,7 +17,21 @@
     }
     
 }
+@media screen and (width < 900) {
+    .card{
+        display: none;
+        background: red;
+    }
+}
 
+.showNav{
+    transform: translateY(-150px);
+    transition: 0.5s;
+}
+.hideNav{
+    transform: translateY(0);
+    transition: 0.5s;
+}
 .heroText{
     font-size:var(--hero-text) ;
 }
@@ -50,6 +67,7 @@
 .skillHome{
     z-index: -1;
     min-height: 404px;
+    background-color: var(--bg-1);
 
 }
 .skill-home-heading{
@@ -60,8 +78,14 @@
     /*border:10px solid red;*/
     /*box-shadow: 10px 10px 4px rgba(255, 0, 0, 0.3);*/
 }
+
+
+
 .project-Home{
-    background-color: #212121;
+    /*background-color: #212121;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }
 
 .project-title{
@@ -69,13 +93,8 @@
 }
 .project-container{
     background-color: rgba(237,112,93,0.88);
-    /*background-color: white;*/
 }
-.custom-class{
-    padding: 0 !important;
-    padding-inline: 0;
-    padding-block: 0;
-}
+
 .project-heading-middle{
     font-size:var(--project-home-title);
 }
@@ -108,4 +127,12 @@
     height: 150px;
     background: #000;
 }
+.contact-Home-container{
+    background-color: #181d26;
+    height: 980px;
+}
 
+.activeFilter{
+    background-color: black;
+    transition: 0.3s;
+}

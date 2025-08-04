@@ -1,49 +1,70 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SkillHomeComponent} from "./Skill Components/SkillHomeComponent.jsx";
 import {motion} from "motion/react";
 
 export function SkillsHome() {
+    const [initial, setInitial] = useState({opacity:0.8,scaleY:0.2});
+    const [animate, setAnimate] = useState({opacity:1,scaleY:1});
+    const [animation, setAnimation] = useState(initial);
     return (
         <>
-            <div className={"w-full p-10 skillHome"} >
-                <div className={"skill-home-heading text-center "}
+            <motion.div
+                onViewportEnter={()=>{
+                    setAnimation(animate);
+                }}
+                animate={animation}
+                style={{...initial,...{transformOrigin:"top center"}}}
+                transition={{duration:1}}
+                className={"w-full p-10 skillHome"} >
+                <div className={"skill-home-heading text-center rounded-[20px] overflow-hidden"}
                 style={{
-                    color:"#F4E8C1",
-
-
-                }}>
+                    color:"#F4E8C1"}}>
                     <b>
                     Skills
                     </b>
-
                 </div>
                 <div className={"skillCard-container flex-wrap flex justify-center items-center gap-10 p-10"}>
 
                     <SkillHomeComponent image="Html.png"
-                        title="Html 5"
-                        desc="Html 5"
+                                        title="Html 5"
+                                        desc="Html 5"
+                                        color={"#E44D26"}
+                                        delay={0.8}
+
                     />
                     <SkillHomeComponent image="Css.png"
                                         title="Css 3"
                                         desc="Css 3"
+                                        color={"#264DE4"}
+                                        delay={0.9}
+
                     />
                     <SkillHomeComponent image="Js.png"
                                         title="Javascript"
                                         desc="Javascript "
+                                        color={"#F0DB4F"}
+                                        delay={1}
                     />
                     <SkillHomeComponent image="react.png"
                                         title="React Js"
                                         desc="Javascript "
+                                        color={"#61DBFB"}
+                                        delay={1.1}
                     />
                     <SkillHomeComponent image="php.png"
                                         title="PHP"
                                         desc="Javascript "
+                                        color={"#8993BE"}
+                                        delay ={1.2}
                     />
 
 
                 </div>
-                <CustomButton link={"Skills"} text={"Read More"}/>
-            </div>
+                <motion.div style={{maxWidth:"160px", placeSelf:"center"}} animate={animation} initial={initial}>
+                <CustomButton link={"Skills"} text={"Read More"} style={{
+                }} />
+                </motion.div>
+            </motion.div>
         </>
     )
 }
@@ -54,7 +75,7 @@ import {Link} from "react-router-dom";
 const CustomButton = (prop) => {
     return (
         <StyledWrapper>
-                    <Link to={'/'+prop.link}>
+                    <Link to={'/'+prop.link} style={{maxWidth:"160px"}}>
             <button  className="animated-button place-self-center">
                 <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />

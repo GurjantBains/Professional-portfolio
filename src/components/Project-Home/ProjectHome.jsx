@@ -1,18 +1,24 @@
 import Project from "./Project/Project.jsx";
 import GradientText from "@/blocks/TextAnimations/GradientText/GradientText.jsx";
 import CustomButton from "@/components/Skills-Home/SkillsHome.jsx";
-import {useRef} from "react";
+import React, {useRef} from "react";
 
 export function ProjectHome() {
     const mainDivRef = useRef(null);
+    const bg = useRef(null);
+
     return (
         <>
          <div className="project-Home w-full p-20"
               ref={mainDivRef}
+              style={{
+
+              }}
+
          >
              <div className="project-title place-self-center text-6xl"
              style={{
-                 color: "white",
+                 color: "#ffa500",
              }}><b>
                  <GradientText
                      colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
@@ -20,8 +26,8 @@ export function ProjectHome() {
                      showBorder={false}
                      className="custom-class"
                  >
-                 Projects
                  </GradientText>
+                 Projects
              </b>
              </div>
              <div className={"projects w-full flex flex-col p-20 gap-100"}>
@@ -33,6 +39,8 @@ export function ProjectHome() {
                            img2={"Project1/Project1-2.png"}
                            reff={mainDivRef}
                            bg={'Project1/Project1-bg.png'}
+                           bg1={bg}
+
                  />
                  <Project  title={"Wordpress Theme"}
                            desc={"Made full replica of Wordpress Theme"}
@@ -42,15 +50,19 @@ export function ProjectHome() {
                            img2={"Project2/Project2-2.png"}
                            reff={mainDivRef}
                            bg={'Project2/Project2-bg.png'}
+                           bg1={bg}
+
                  />
 
 
 
 
 
-             </div>
-                 <CustomButton text={"See All Projects"} link={"Projects"}/>
 
+             </div>
+             <div style={{maxWidth:"max-content", placeSelf:"center"}}>
+                 <CustomButton text={"See All Projects"} link={"Projects"}/>
+             </div>
          </div>
         </>
     )

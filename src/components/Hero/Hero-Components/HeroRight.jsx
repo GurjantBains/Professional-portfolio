@@ -82,9 +82,10 @@ export function HeroRight() {
         }
 
 
-        return <motion.div className="circle relative"
+        return <div className={"flex place-self-center relative justify-center place-content-center right-30"}>
+    <motion.div className="circle absolute  "
+
                            style={{
-                               y:-50,
                                zIndex: 10,
                            }}
                            onViewportEnter={()=>{
@@ -94,21 +95,24 @@ export function HeroRight() {
                            onViewportLeave={()=>{
                                mainCircleInView.current=false
                            }}
-                           animate={{}}
+                           animate={{}}>
+        </motion.div>
 
 
-        >
             <motion.div  className={"circle circleElement absolute bg-black "}
+                         style={{zIndex:1}}
                         animate={controls}
             ></motion.div>
             <motion.div  className={"circle circleElement absolute bg-black "}
+                         style={{zIndex:1}}
                          animate={controls1}
             ></motion.div>
             <motion.div  className={"circle circleElement absolute bg-black "}
+                         style={{zIndex:1}}
                          animate={controls2}
             ></motion.div>
 
-        </motion.div>;
 
+    </div>
 }
 

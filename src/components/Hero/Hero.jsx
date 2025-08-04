@@ -7,12 +7,11 @@ import {HeroRight} from "@/components/Hero/Hero-Components/HeroRight.jsx";
 export function Hero() {
     return (
         <>
-            <div className={"heroContainer w-full flex overflow-hidden  p-10 justify-between pb-0 "}>
+            <div className={"heroContainer w-full flex overflow-hidden  p-10 justify-between pb-0"}>
                 <div className={" gap-5 flex justify-center flex-col pl-20"}>
 
                     <div className={"heroText"}>
-                    Hey I am <b style={{color:"#C6CAED"}}>
-                        Gurjant Singh
+                    Hey I am <br/>  <b style={{color:"#C6CAED",fontSize:50}} className={"font-extrabold "}>Gurjant Singh
 
                     </b>
                     </div>

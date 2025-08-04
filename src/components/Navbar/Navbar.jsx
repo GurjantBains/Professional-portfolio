@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {NavLink} from "react-router-dom";
 import './Navbar.css';
 import { motion } from "motion/react"
@@ -14,27 +14,38 @@ export function Navbar() {
             duration: 2000,
         }
     });
+    const [showNav, setShowNav] = useState(true);
+    const lastScroll = useRef(0);
+
+    const handleScroll = () => {
+        const currentScroll = window.scrollY
+
+        if(currentScroll > lastScroll.current && currentScroll>50) {
+            setShowNav(false)
+        }
+        else{
+            setShowNav(true)
+        }
+        lastScroll.current = currentScroll;
+    }
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+    }, []);
 
 
     return (
         <>
-            <div className={"flex items-center justify-center p-8 absolute w-full z-100"}>
+            <motion.div className={`flex items-center justify-center fixed p-8   w-full z-100 ${showNav ? " hideNav" : " showNav"} ` }>
         <motion.div
-           animate={{
-               top:"0px",
-               opacity:1,
-               transition:{
-                   duration: 0.7,
-               }
 
-           }}
-           onLoad={()=>{
-               console.log('d');
-           }}
+
+
             style={{
-                position:"relative",
-                top:"-200px",
-                opacity:0,
+                position:"fixed",
+                top:"20px",
             }}
             className={"flex gap-3 max-w-max p-3 justify-center " +
             "bg-var(--bg-nav-color) navBar rounded-4xl py-3 relative "}>
@@ -53,7 +64,7 @@ export function Navbar() {
 
 
         </motion.div>
-            </div>
+            </motion.div>
         </>
     )
 }
