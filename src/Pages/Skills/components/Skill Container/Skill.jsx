@@ -33,7 +33,7 @@ const SkillChooser = (prop) =>{
 
     return (
         <>
-            <motion.div className="w-full  text-4xl p-3 border-2 cursor-pointer text-center select-none "
+            <motion.div className= {`w-full  text-4xl p-3 border-2 border-white cursor-pointer text-center select-none ${prop.s===prop.keys?"text-[#38bdf8] text-5xl":""}`}
                         whileHover={{
                             scale: 1.1,
                         }}
@@ -93,12 +93,3 @@ const SkillCardContainer = (prop) => {
     )
 }
 
-const SKillCard = (prop) => {
-    return (
-        <>
-            <motion.div>
-                {prop.title}
-            </motion.div>
-        </>
-    )
-}

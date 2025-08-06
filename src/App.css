@@ -7,7 +7,6 @@
     --project-home-title:30px;
     --project-home-description:15px;
     --bg-1:#181d26;
-
     --skill-page-card-title:30px;
 }
 @media (width<600px){
@@ -23,6 +22,12 @@
         background: red;
     }
 }
+html{
+    scroll-behavior: smooth;
+}
+*{
+    box-sizing: border-box;
+}
 
 .showNav{
     transform: translateY(-150px);
@@ -31,6 +36,13 @@
 .hideNav{
     transform: translateY(0);
     transition: 0.5s;
+}
+.nav-con{
+    transition: height 0.1s ease, width 0.1s ease;
+}
+.nav-con div{
+    transition: width 0.54s ease;
+
 }
 .heroText{
     font-size:var(--hero-text) ;
@@ -133,6 +145,45 @@
 }
 
 .activeFilter{
-    background-color: black;
+    background-color: black !important;
     transition: 0.3s;
+}
+.ProjectCard::after{
+    content: "";
+    background-image: radial-gradient(18% 28% at 24% 50%, #CEFAFFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, #FFFFFF59 6%, #073AFF00 100%),radial-gradient(70% 53% at 36% 76%, #73F2FFFF 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(42% 53% at 34% 72%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(31% 43% at 7% 98%, #FFFFFFFF 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, #D3FF6D9C 24%, #073AFF00 100%),radial-gradient(35% 56% at 91% 74%, #8A4FFFF5 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, #6DFFAEF5 24%, #073AFF00 100%),linear-gradient(125deg, #4EB5FFFF 1%, #4C00FCFF 100%);
+}
+.ProjectCard::after{
+    position: absolute;
+    width: 70%;
+    height: 150%;
+    z-index: 1;
+    top: -30%;
+    left: 25%;
+    transform: rotate(45deg);
+    background-color: white;
+    animation: ProjectCard 2s  infinite ;
+    animation-play-state: paused;
+}
+.ProjectCard:hover{
+    padding: 8px;
+    transition: 0.5s;
+}
+
+.ProjectCard:hover::after{
+    content: "";
+    animation-play-state: running;
+}
+
+@keyframes  ProjectCard{
+    100% {
+        transform: rotate(225deg);
+    }
+
+}
+.activeCode{
+    background: white;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
 }
