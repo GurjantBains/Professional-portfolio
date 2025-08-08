@@ -1,18 +1,31 @@
 import {Navbar} from "../../components/Navbar/Navbar.jsx";
-import {motion, useAnimation} from "motion/react";
-import {useRef, useState} from "react";
-import {scale} from "motion";
+import {motion} from "motion/react";
+import {useEffect, useState} from "react";
 import CustomButton from "@/components/Skills-Home/SkillsHome.jsx";
-
 
 
 export function Projects() {
     window.scrollTo(0, 0);
+    const [projects, setProjects] = useState([]);
+   const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/"
+   //  const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/"
+
+
+    
+    useEffect(()=>{
+        async function fetchCode(){
+            const data = await fetch(`${baseUrl}api-fetch-projects.php`)
+            console.log(" fetching data")
+            return await data.json()}
+        fetchCode().then(data => {
+            setProjects(data)
+        })
+    },[])
     const [activeFilter, setActiveFilter] = useState("all");
     return (
         <>
                 <Navbar />
-            <div className={"w-full  flex place-content-center pt-[100px] bg-zinc-900"}>
+            <div className={"w-full  flex place-content-center pt-[100px] bg-zinc-900 min-h-[100vh]"}>
 
                 <div className={" w-[90%] pt-10" }>
                     <div className={" @xs:text-5xl @xs:text-center sm:text-8xl sm:text-left pl-[100px]"}>
@@ -22,13 +35,20 @@ export function Projects() {
                     <ProjectFilter active={activeFilter} setActive={setActiveFilter}/>
                     </div>
                     <div className={"flex flex-wrap p-[50px] gap-10 justify-center  overflow-hidden rounded-2xl"}>
-                        <ProjectCard projectid={"12"} title="Portfolio" keys={0} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" />
+
+                    {
+                        projects?.length>0?projects.map((e,i)=>{return <ProjectCard projectid={e.id}  title={e.name} key={i} img={baseUrl+e.mainImage} desc={e.description} />}):console.log("projects")
+                    }
+
+
+
+                        {/* <ProjectCard projectid={"12"} title="Portfolio" keys={0} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" />
                         <ProjectCard projectid={"12w"} title="Wordpress Replica" keys={1} img={"Project2/Project2.png"} desc="Made replica of wordpress theme" />
                         <ProjectCard projectid={"12"} title="Portfolio" keys={2} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" />
                         <ProjectCard projectid={"12w"} title="Portfolio" keys={3} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" />
                         <ProjectCard projectid={"12e"} title="Portfolio" keys={4} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" />
                         <ProjectCard projectid={"12w"} title="Portfolio" keys={5} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" />
-                        <ProjectCard projectid={"121"} title="Portfolio" keys={6} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" />
+                        <ProjectCard projectid={"121"} title="Portfolio" keys={6} img={"Project1/Project1.png"} desc=" My minimilistic Portfolio Website" /> */}
                     </div>
 
                 </div>

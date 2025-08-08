@@ -3,7 +3,9 @@ import {Skill} from "@/Pages/Skills/components/Skill Container/Skill.jsx";
 import Particles from "@/blocks/Backgrounds/Particles/Particles.jsx";
 export function Skills() {
     return (
-        <><div className={" w-full h-[900px] flex place-content-center"}>
+        <>
+            <Navbar/>
+            <div className={" w-full  flex place-content-center min-h-[100vh]"}>
 
             <div className={"w-full h-full absolute top-0 left-0"}>
                 <Particles
@@ -12,17 +14,17 @@ export function Skills() {
                     particleSpread={10}
                     speed={0.1}
                     particleBaseSize={100}
-                    moveParticlesOnHover={true}
                     alphaParticles={false}
                     disableRotation={false}
+
                 />
             </div>
-
-
-            <Navbar/>
-            <div className={" w-full flex place-items-center place-content-center z-10"}>
+                <div className={"w-full pl-[40px] pt-[120px] z-90 max-xl:place-self-center  "}>
             <Skill/>
-            </div>
+                </div>
+
+
+            {/*<div className={" w-full  flex place-items-center place-content-center" + "min-h-[50%]  z-10 md:p-[10px] pt-[150px]"}></div>*/}
 
 
         </div>

@@ -16,16 +16,28 @@ export function Navbar() {
         }
     });
     const location = useLocation();
-    const pageName = location.pathname ==="/About"
+    const [pageName,setPageName] = useState(location.pathname ==="/About")
+    if(pageName === false){
+        if(window.innerWidth<900){
+            setPageName ( true)
+        }
+    }
+    window.addEventListener("resize",()=>{
+        if(pageName === false){
+            if(window.innerWidth<900){
+                setPageName ( true)
+            }
+            else {
+                setPageName (false)
+            }
+        }
+    })
     const [open, setOpen] = useState(false);
-
-
-
 
     return (
         <>
-            <motion.div className={`flex nav-con items-center ${pageName?"flex-col pt-7 bg-[#d9d8d4] fixed overflow-hidden ":" w-[98%] absolute p-8  justify-center"} r z-99 
-            ${open?" h-[100vh]  ":" justify-center rounded-[50%] w-[80px] h-[80px] m-[10px] ml-[20px] `"}
+            <motion.div className={`flex nav-con items-center ${pageName?"flex-col pt-7 bg-[#d9d8d4] fixed overflow-hidden ":" w-[98%] absolute p-8  justify-center"} r z-999 
+            ${open?" h-[100%]  ":" justify-center rounded-[50%] w-[80px] h-[80px] m-[10px] ml-[20px] `"}
             ` } id={"navBar"}>
             <Checkbox setOpen={setOpen} open={open} visibility={pageName}/>
                 <motion.div  className={`flex ${pageName?"flex-col":"rounded-4xl top-[20px]"}  gap-3  p-3 justify-center bg-[#d9d8d4] overflow-hidden navBar py-3 relative 

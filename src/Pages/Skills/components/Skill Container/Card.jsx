@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const Card = (prop) => {
     return (
-        <StyledWrapper className={"h-max"}>
-            <div className="card">
+        <StyledWrapper className={"h-max  "}>
+            <div className="card w-[190px] h-[254px]">
                 <h2>{prop.title}</h2>
             </div>
         </StyledWrapper>

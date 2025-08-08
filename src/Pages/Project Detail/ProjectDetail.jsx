@@ -1,62 +1,101 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {motion} from "motion/react";
 import {Navbar} from "@/components/Navbar/Navbar.jsx";
 import {useEffect, useRef, useState} from "react";
+import Loader from "@/components/Loader/Loader.jsx";
 
 export function ProjectDetail() {
+    // const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/"
+    const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/"
     const { projectid } = useParams();
-    const arr =[
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/App.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/App.css",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/Pages/Home/Home.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/Pages/Projects/Projects.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/Pages/About/About.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/Pages/Skills/Skills.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/Pages/Skills/components/Skill Container/Card.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/Pages/Skills/components/Skill Container/Skill.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/assets/react.svg",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/blocks/Animations/StarBorder/StarBorder.css",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/blocks/Animations/StarBorder/StarBorder.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/blocks/Backgrounds/Particles/Particles.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/blocks/TextAnimations/GradientText/GradientText.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/blocks/TextAnimations/TextType/TextType.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Contact/Contact.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Hero/Hero-Components/HeroRight.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Hero/Hero.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Navbar/Navbar.css",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Navbar/Navbar.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Project-Home/Project/Project.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Project-Home/ProjectHome.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Skills-Home/Skill Components/SkillHomeComponent.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/components/Skills-Home/SkillsHome.jsx",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/index.css",
-        "https://raw.githubusercontent.com/GurjantBains/Professional-portfolio/main/src/main.jsx"
-    ]
-    useEffect(()=>{
+    const [projectDetails, setProjectDetails] = useState([]);
+    const [sections, setSections] = useState([])
+    const [urlArr, setUrlArr] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [notFound, setNotFound] = useState(false);
+    const [retry, setRetry] = useState(1);
 
-    })
+
+    useEffect(()=>{
+        async function fetchDetails(){
+        const result = await fetch(baseUrl+"api-fetch-project.php",{
+            method:"POST",
+            mode:"cors",
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify({
+                id: projectid,
+            })
+        })
+            return (await result).json()
+        }
+         fetchDetails().then(r => {
+             setLoading(false);
+             console.log(r);
+             if(r.message){
+                 setNotFound(r.message)
+                 console.log(r.message)
+             }
+             else {
+             setProjectDetails(r)
+             }
+         }).catch(err=>{
+             setLoading(false);
+             setError(true)
+         })
+    },[retry])
+    useEffect(() => {
+        if(projectDetails.length>0){
+            const a = JSON.parse(projectDetails[0].sections)
+            const b = JSON.parse(projectDetails[0].urls)
+
+
+            setSections(a)
+            setUrlArr(b)
+
+        }
+    }, [projectDetails]);
+
+    function retryF(){
+        console.log("retrying");
+        setRetry(retry*-1);
+        setError(false)
+        setNotFound(false)
+        setLoading(true)
+    }
 
 
     return (
         <>
+            {
+                loading?<Loader/>:""
+            }
+            {/*<Loader />*/}
           <Navbar/>
             <motion.div className={"w-full h-full flex justify-center items-center pt-[150px] flex-col"}>
                 <motion.div className={"w-[70%]"}>
 
                     <motion.div className={"text-5xl text-center font-bold"}>
-                        PortFolio
+                        {
+                            projectDetails?.length>0?projectDetails[0].name:""
+                        }
                     </motion.div>
-                    <ProjectDescription title={"✨ Portfolio Description"} desc={"Welcome to my personal portfolio — a curated space showcasing who I am, what I do, and how I can help bring ideas to life through design and development."}  />
-                    <ProjectDescription title={"🧑‍💻 About Me"} desc={"Get to know the person behind the code. This section gives a brief introduction to who I am, my passion for technology, and the journey that shaped my skills. Whether you're a recruiter, client, or fellow developer, this is where you’ll understand what drives me."} img="/Project1/Project1.png" />
-                    <ProjectDescription title={"🛠️ Skills"} desc={"A clear breakdown of the technologies, tools, and frameworks I specialize in. From frontend to backend, this section reflects my technical proficiency and the stack I use to build scalable, efficient, and visually appealing applications."} img="/Project1/Project1-1.png" />
-                    <ProjectDescription title={"🚀 Projects"} desc={"A showcase of my favorite and most impactful work. Each project includes a brief summary, technologies used, and links to live demos or repositories. It demonstrates my ability to solve real-world problems through thoughtful design and clean code."} img="/Project1/Project1-2.png" />
-                    <ProjectDescription title={"📬 Contact"} desc={"Interested in collaborating or hiring? The contact section makes it easy to reach out. Whether it’s a professional opportunity or a tech-related conversation, I’m always open to connecting.\n" +
-                        "\n"} img="/Project1/Project1-3.png" />
+                    {
+                        sections.length>1?sections.map((e,i)=>{
+                            return <ProjectDescription title={e[0]} desc={e[1]} key={i} img={e[2]}/>
+
+                        }):""}
+                    {
+                        !loading?error?<div className="text-center w-full text-5xl">Could Not Load Project</div>:"":""
+                    }{
+                    !loading?notFound?<ProjectNotFound setRetry={setRetry} retry={retryF} />:"":""
+                }
                 </motion.div>
 
-                <ProjectCodePage url={arr}/>
+                <ProjectCodePage url={urlArr}/>
                 <div className={"w-full pt-[20px"}>
-
+                    <div>
+                    </div>
                 <Button color={"transparent"}/>
                 </div>
 
@@ -67,13 +106,18 @@ export function ProjectDetail() {
 }
 
 const ProjectDescription  = (prop) => {
+    // const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/Public"
+    const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/Public"
+
     return (
         <>
             <motion.div className={"text-xl mt-[50px] gap-2 grid"}>
                 <motion.div className={"text-left text-3xl font-semibold"}>{prop.title}</motion.div>
+                <div className={"text-gray-300"}>
                 {prop.desc}
+                </div>
                 {prop.img!==undefined?
-                <img src={prop.img} alt={"ss"} width={"70%"} className={"place-self-center mt-5"}/>:""
+                <img src={baseUrl+prop.img} alt={"ss"} width={"70%"} className={"place-self-center mt-5"}/>:""
                 }
             </motion.div>
 
@@ -95,15 +139,7 @@ const ProjectCodePage = (prop) => {
                setName(names)
            }
        }
-    }, []);
-    // useEffect(() => {
-    //     async function highlightCode(){
-    //     if(codeRef.current ) {
-    //        await new Promise(()=>{  hljs.highlightAll()});
-    //     }
-    //     }
-    //     highlightCode();
-    // },[activeCode])
+    }, [prop.url]);
 
 
     return (
@@ -112,7 +148,7 @@ const ProjectCodePage = (prop) => {
                 <div className={"w-[70%]"}>
 
                 <div className={"text-6xl text-center"}>
-                    Code
+                    {name.length>0?"Code":""}
                 </div>
                     <div ref={codeRef} className={"w-full flex flex-wrap mt-[50px]"}>
 
@@ -124,12 +160,15 @@ const ProjectCodePage = (prop) => {
                                     id={i}
                                     active={activeCode}
                                     setAC={setActiveCode} />
-                            )):"null"
-                        }
+                            )):""
+                        }{
+                    }
 
                     </div>
+                    {
+                        name.length>0?<ProjectCode  url={prop.url[activeCode]} id={activeCode} />:""
+                    }
 
-            <ProjectCode  url={prop.url[activeCode]} id={activeCode} />
                 </div>
 
         </div>
@@ -139,7 +178,6 @@ const ProjectCodePage = (prop) => {
 
 import "highlight.js/styles/github.css";
 import "highlight.js/styles/atom-one-dark.css";
-
 import hljs from "highlight.js";
 import {Button} from "@/components/Contact/Contact.jsx";
 
@@ -163,6 +201,7 @@ const ProjectCode = (prop) => {
            }
        }catch(err){
            console.log(err)
+           setHighlightedCode("Could Not Load Code")
        }finally {
            if (isMounted){setIsLoading(false)}
            // a.current.dangerouslySetInnerHTML = {__html:highlightedCode}
@@ -204,5 +243,64 @@ const ProjectCodeLoader  = (prop) => {
 
         </>
     )
+}
+
+const NewProjectDetail  = (prop) => {
+    return (
+        <>
+        <div className={"bg-black  border-white  border-1 cursor-pointer"} onClick={()=>{
+
+        }}>
+            {prop.title}
+        </div>
+
+        </>
+    )
+}
+
+const ProjectNotFound =(prop) => {
+
+    return (
+        <div className="min-h-[220px] flex items-center justify-center p-6">
+            <div
+                role="status"
+                aria-live="polite"
+                className="w-full max-w-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm p-8 text-center"
+            >
+                <div className="mx-auto mb-6 w-24 h-24 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                    {/* Simple illustrative SVG */}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 19a8 8 0 100-16 8 8 0 000 16z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.5 8.5l7 7" />
+                    </svg>
+                </div>
+
+                <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">Project not found</h2>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
+                    We couldn't find the project you were looking for — it might have been removed or the
+                    link could be incorrect.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button
+                        type="button"
+                        onClick={()=>{
+                            prop.retry()
+                        }}
+                        className="inline-flex cursor-pointer items-center justify-center px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                        Retry
+                    </button>
+
+                    <Link
+                        className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none"
+                     to={'/Projects'}>
+                        See other projects
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
 }
 
