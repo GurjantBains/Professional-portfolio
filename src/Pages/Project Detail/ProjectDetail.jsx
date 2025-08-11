@@ -5,8 +5,8 @@ import {useEffect, useRef, useState} from "react";
 import Loader from "@/components/Loader/Loader.jsx";
 
 export function ProjectDetail() {
-    // const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/"
-    const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/"
+    const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/"
+    // const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/"
     const { projectid } = useParams();
     const [projectDetails, setProjectDetails] = useState([]);
     const [sections, setSections] = useState([])
@@ -106,8 +106,8 @@ export function ProjectDetail() {
 }
 
 const ProjectDescription  = (prop) => {
-    // const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/Public"
-    const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/Public"
+    const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/Public"
+    // const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/Public"
 
     return (
         <>
@@ -190,7 +190,7 @@ const ProjectCode = (prop) => {
     async function getCode(){
        try{
            setIsLoading(true)
-           setHighlightedCode("")
+           // setHighlightedCode("")
            const response = await fetch(prop.url)
            const data1 = await response.text();
            if(isMounted ){

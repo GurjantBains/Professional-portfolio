@@ -2,6 +2,7 @@ import {motion} from "motion/react";
 import {react ,useState} from "react"
 import React from 'react';
 import styled from 'styled-components';
+import {toast, ToastContainer} from "react-toastify";
 
 export function Contact() {
     const [animation, setAnimation] = useState({
@@ -79,8 +80,7 @@ export function Contact() {
             </div>
         </div>
                 <Button color={"#181d26"}/>
-
-
+            <ToastContainer/>
         </>
     )
 }
@@ -88,17 +88,38 @@ export function Contact() {
 
 
 const Form = () => {
-    const [angle, setAngle] = useState();
+    const handleSubmit = async (e) => {
+    const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/"
+    const url = 'api-contact-me.php'
+        const result = await fetch(baseUrl + url, {
+            method: "POST",
+            body: JSON.stringify({
+                email: e.get("email"),
+                name: e.get("name"),
+                message: e.get("message"),
+
+            }),
+            headers: {'content-type': 'application/json'},
+            mode:"cors",
+        })
+        const data = await result.json()
+        console.log(e)
+        console.log(data)
+        if(data.status === 'success'){
+            toast("Message successfully sent")
+        }else{
+
+            toast("Failed to send message")
+        }
+    }
     return (
         <StyledWrapper>
             <div className="form-container">
                 <form
                     className="form"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                    }}
+                    action={handleSubmit}
                 >
-                    <div className="form-group">
+                     <div className="form-group">
                         <label htmlFor="name">Your Name</label>
                         <input type="text" id="name" name="name" required />
                     </div>
@@ -108,7 +129,7 @@ const Form = () => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="textarea">How Can I Help You?</label>
-                        <textarea name="textarea" id="textarea" rows={10} cols={50} required />
+                        <textarea name="message" id="textarea" rows={10} cols={50} required />
                     </div>
                     <button className="form-submit-btn" type="submit">
                         Submit
