@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import './App.css'
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import {Navbar} from "./components/Navbar/Navbar.jsx";
@@ -13,9 +13,13 @@ import {Analytics} from "@vercel/analytics/react";
 
 
 function App() {
+    useEffect(() => {
+        document.title = "Gurjant's Portfolio"
+    }, []);
 
 
-  return (
+
+    return (
     <>
       <Routes>
           <Route path='/' element={<Home />} />
