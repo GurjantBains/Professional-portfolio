@@ -15,7 +15,7 @@ export function SkillsHome() {
                 animate={animation}
                 style={{...initial,...{transformOrigin:"top center"}}}
                 transition={{duration:1}}
-                className={"w-full p-10 skillHome"} >
+                className={"w-full min-[500px]:p-10 skillHome"} >
                 <div className={"skill-home-heading text-center rounded-[20px] overflow-hidden"}
                 style={{
                     color:"#F4E8C1"}}>
@@ -23,7 +23,7 @@ export function SkillsHome() {
                     Skills
                     </b>
                 </div>
-                <div className={"skillCard-container flex-wrap flex justify-center items-center gap-10 p-10"}>
+                <div className={"skillCard-container flex-wrap flex justify-center items-center gap-10 min-[100px]:p-10 "}>
 
                     <SkillHomeComponent image="Html.png"
                                         title="Html 5"
@@ -75,7 +75,7 @@ import {Link} from "react-router-dom";
 const CustomButton = (prop) => {
     return (
         <StyledWrapper>
-                    <Link to={'/'+prop.link} style={{maxWidth:"160px"}}>
+                    <Link to={'/'+prop.link} style={{maxWidth:"160px",width:"fit-content"}}>
             <button  className="animated-button place-self-center">
                 <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />

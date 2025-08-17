@@ -35,7 +35,7 @@ const SkillChooser = (prop) =>{
 
     return (
         <>
-            <motion.div className= {`w-full flex place-items-center justify-center  text-2xl lg:text-4xl p-3 border-2 border-white cursor-pointer text-center select-none ${prop.s===prop.keys?"text-[#38bdf8] text-3xl lg:text-5xl":""}`}
+            <motion.div className= {`w-full flex place-items-center justify-center max-sm:text-lg sm:text-2xl lg:text-4xl p-3 border-2 border-white cursor-pointer text-center select-none ${prop.s===prop.keys?"text-[#38bdf8] text-3xl lg:text-5xl":""}`}
                         whileHover={{
                             scale: 1.1,
                         }}

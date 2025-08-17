@@ -7,6 +7,10 @@ export function HeroRight() {
     const controls1 = useAnimation();
     const controls2 = useAnimation();
     const mainCircleInView = useRef(true);
+    const [count, setCount] = useState(0);
+    const aniData = [["💻 React","🎨 Tailwind","Bootstrap"],["🌐 PHP","🗄 MySQL","📊 SQL"],["Laravel","Next JS","Kubernetes"]]
+    const title = ["Frontend","Backend","Future Goals"];
+
     const transition = useRef({
         duration: 0.4,
         // type: "spring",
@@ -17,20 +21,28 @@ export function HeroRight() {
 
 
     async function animateCircle() {
-            console.log(mainCircleInView.current);
+        // if(count === 2){
+        // setCount(count=>count + 1);
+        // }
+        // else {
+        // setCount((count)=>count + 1);
+        // }
+        setCount(count => (count + 1) % 3);
+            console.log(count);
            if(!mainCircleInView.current)return;
             // Move left
         await controls.start({
-                x: -600,
+                x: -400,
                 scale:scale.current,
-                transition:transition
+                transition:transition,
+
             });
         await new Promise(res => setTimeout(res, 50));
 
 
         await controls1.start({
-            x: -350,
-            y:-300,
+            x: -150,
+            y:-250,
             scale:scale.current,
             transition:transition
         });
@@ -38,8 +50,8 @@ export function HeroRight() {
 
 
         await controls2.start({
-            x: -350,
-            y:300,
+            x: -150,
+            y:250,
             scale:scale.current,
             transition:transition
         });
@@ -82,8 +94,8 @@ export function HeroRight() {
         }
 
 
-        return <div className={"flex place-self-center relative justify-center place-content-center right-30"}>
-    <motion.div className="circle absolute  "
+        return <div className={"   place-self-center relative justify-center place-content-center right-30 "}>
+    <motion.div className="circle absolute bigC "
 
                            style={{
                                zIndex: 10,
@@ -95,22 +107,24 @@ export function HeroRight() {
                            onViewportLeave={()=>{
                                mainCircleInView.current=false
                            }}
-                           animate={{}}>
+                           // animate={{}}
+    >
+        {title[count]}
         </motion.div>
 
 
-            <motion.div  className={"circle circleElement absolute bg-black "}
+            <motion.div  className={"circle circleElement absolute  bg-black bgOfcircles"}
                          style={{zIndex:1}}
                         animate={controls}
-            ></motion.div>
-            <motion.div  className={"circle circleElement absolute bg-black "}
+            >{aniData[count][0]}</motion.div>
+            <motion.div  className={"circle circleElement absolute bg-black bgOfcircles"}
                          style={{zIndex:1}}
                          animate={controls1}
-            ></motion.div>
-            <motion.div  className={"circle circleElement absolute bg-black "}
+            >{aniData[count][1]}</motion.div>
+            <motion.div  className={"circle circleElement absolute bg-black bgOfcircles"}
                          style={{zIndex:1}}
                          animate={controls2}
-            ></motion.div>
+            >{aniData[count][2]}</motion.div>
 
 
     </div>

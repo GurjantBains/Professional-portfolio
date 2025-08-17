@@ -15,6 +15,7 @@ const StarBorder = ({
     const [initial, setInitial] = useState({opacity:0,x:-100});
     const [animate, setAnimate] = useState({opacity:1,x:0});
     const [animation, setAnimation] = useState(initial);
+
     return (
 
 
@@ -31,7 +32,7 @@ const StarBorder = ({
                 setAnimation(animate)
                 console.log(delay)
             }}
-            className={`relative inline-block overflow-hidden rounded-[20px] ${className}`}
+            className={`relative inline-block overflow-hidden rounded-[20px] ${className} `}
             style={{
                 padding: `${thickness}px 0`,
                 ...rest.style,

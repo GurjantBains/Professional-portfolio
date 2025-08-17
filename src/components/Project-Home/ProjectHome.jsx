@@ -10,12 +10,7 @@ export function ProjectHome() {
     return (
         <>
          <div className="project-Home w-full p-20"
-              ref={mainDivRef}
-              style={{
-
-              }}
-
-         >
+              ref={mainDivRef}>
              <div className="project-title place-self-center text-6xl"
              style={{
                  color: "#ffa500",
@@ -30,7 +25,7 @@ export function ProjectHome() {
                  Projects
              </b>
              </div>
-             <div className={"projects w-full flex flex-col p-20 gap-100"}>
+             <div className={"projects w-full flex flex-col lg:p-20 py-30 gap-100"}>
                  <Project  title={"Portfolio"}
                            desc={"My professional Portfolio Website"}
                            tags={["Front-End","Back-end","Full-Stack","Mysql SQL","PHP","React","Tailwind CSS"]}

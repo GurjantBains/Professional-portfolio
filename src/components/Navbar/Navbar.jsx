@@ -30,6 +30,7 @@ export function Navbar() {
             else {
                 setPageName (false)
             }
+
         }
     })
     const [open, setOpen] = useState(false);

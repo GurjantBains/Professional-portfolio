@@ -5,8 +5,8 @@ import {useEffect, useRef, useState} from "react";
 import Loader from "@/components/Loader/Loader.jsx";
 
 export function ProjectDetail() {
-    const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/"
-    // const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/"
+    // const baseUrl = "http://localhost/API/Portfolio%20Api/Portfolio-Api/"
+    const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
     const { projectid } = useParams();
     const [projectDetails, setProjectDetails] = useState([]);
     const [sections, setSections] = useState([])
@@ -46,8 +46,9 @@ export function ProjectDetail() {
     },[retry])
     useEffect(() => {
         if(projectDetails.length>0){
-            const a = JSON.parse(projectDetails[0].sections)
+            const a =JSON.parse(projectDetails[0].sections)
             const b = JSON.parse(projectDetails[0].urls)
+
 
 
             setSections(a)
@@ -81,7 +82,7 @@ export function ProjectDetail() {
                         }
                     </motion.div>
                     {
-                        sections.length>1?sections.map((e,i)=>{
+                        sections.length>0?sections.map((e,i)=>{
                             return <ProjectDescription title={e[0]} desc={e[1]} key={i} img={e[2]}/>
 
                         }):""}
@@ -106,8 +107,9 @@ export function ProjectDetail() {
 }
 
 const ProjectDescription  = (prop) => {
-    const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/Public"
-    // const baseUrl ="https://pkp2lck4-80.inc1.devtunnels.ms/API's/Portfolio%20Api/Portfolio-Api/Public"
+    // const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/Public"
+    const baseUrl = "https://portfolio-api-c2uc.onrender.com/Public"
+
 
     return (
         <>
@@ -117,7 +119,7 @@ const ProjectDescription  = (prop) => {
                 {prop.desc}
                 </div>
                 {prop.img!==undefined?
-                <img src={baseUrl+prop.img} alt={"ss"} width={"70%"} className={"place-self-center mt-5"}/>:""
+                <img src={prop.img} alt={"ss"} width={"70%"} className={"place-self-center mt-5"}/>:""
                 }
             </motion.div>
 
@@ -129,6 +131,7 @@ const ProjectCodePage = (prop) => {
     const [name, setName] = useState([]);
     const [activeCode, setActiveCode] = useState(0)
     const codeRef = useRef();
+    const [mobile, setMobile] = useState(false)
 
     // const name =[];
 //remove on publish build - name.length
@@ -137,32 +140,57 @@ const ProjectCodePage = (prop) => {
            if(prop.url && prop.url.length>0) {
                const names = prop.url.map((item) => (item.split("/").pop()))
                setName(names)
+
            }
        }
     }, [prop.url]);
+    window.addEventListener('resize',()=>{
+        if(window.innerWidth>1200){
+            setMobile(false)
+        }
+        else {
+            setMobile(true)
+        }
+    })
+  useEffect(() => {
+      if(window.innerWidth>1000 ){
+          setMobile(false)
+      }
+      else {
+          setMobile(true)
+
+      }
+      console.log(mobile)
+  },[])
 
 
     return (
         <>
             <div className={"w-full flex flex-col items-center mt-[100px] mb-[200px]"}>
-                <div className={"w-[70%]"}>
+                <div className={"sm:w-[70%]"}>
 
                 <div className={"text-6xl text-center"}>
                     {name.length>0?"Code":""}
                 </div>
-                    <div ref={codeRef} className={"w-full flex flex-wrap mt-[50px]"}>
+                    <div ref={codeRef} className={"w-full flex flex-wrap mt-[50px] "}>
+
 
                         {
-                            name.length>0?name.map((name, i) => (
+                           mobile===false? name.length>0?name.map((name, i) => (
                                 <ProjectCodeLoader
                                     name={name}
                                     key={i}
                                     id={i}
                                     active={activeCode}
                                     setAC={setActiveCode} />
-                            )):""
+                            )):"":""
                         }{
                     }
+                        {
+                            mobile === true?<MobileCodeLoader  active={activeCode} setAC={setActiveCode}
+                            name={name}
+                            />:""
+                        }
 
                     </div>
                     {
@@ -215,14 +243,15 @@ const ProjectCode = (prop) => {
 
     return (
         <>
-            <motion.pre className={"bg-black p-10"}
+            <motion.pre className={"bg-black p-10 w-full overflow-hidden"}
             animate={{transition:{duration:1}}}
             >
-                <code style={{
+                <code
+                    style={{
                     textWrap: "wrap",
                 }} ref={a}
                       dangerouslySetInnerHTML={{__html:highlightedCode}}
-                      className={"bg-black"}>
+                      className={"bg-black w-full text-[10px] break-words overflow-hidden"}>
                     {/*{highlightedCode}*/}
                 </code>
             </motion.pre>
@@ -304,3 +333,23 @@ const ProjectNotFound =(prop) => {
     );
 }
 
+const MobileCodeLoader = (prop) => {
+    const active = useRef(prop.name[prop.active]);
+    console.log(prop.name[prop.active]);
+    console.log(active)
+    return (
+        <>
+            <select className={"p-4 border-1 text-xl rounded-lg mx-auto mb-10   "} value={active.current} onChange={(e)=>{prop.setAC(e.target.value)}}>
+                {
+                    prop.name.map((name, i) => {
+                        // if(name=== active) return
+                     return <option className={"text-black  text-2xl ]"} key={i} value={i}>{name}</option>
+                    })
+
+                }
+
+            </select>
+
+        </>
+    )
+}

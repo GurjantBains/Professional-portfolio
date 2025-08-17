@@ -43,28 +43,28 @@ export function Contact() {
     }
 
     return (
-        <><div className={"contact-Home-container  w-full flex flex-col justify-evenly"}>
-            <div className={"gap-20 flex flex-col justify-center w-full place-self-center"}>
-                <div className={"contact-Home-Form-container flex justify-evenly place-items-center gap-3"}>
+        <><div className={"contact-Home-container  w-full flex flex-col justify-evenly "}>
+            <div className={"gap-20 flex flex-col justify-center w-full place-self-center p-10"}>
+                <div className={"contact-Home-Form-container flex max-xl:flex-col justify-evenly place-items-center gap-3 max-xl:gap-10"}>
                     <motion.div  style={{...initial,...{transformOrigin:`left`,}}}
                                  className={"flex flex-col gap-10"}
                                  onViewportEnter={()=>{setAnimate(animation)}}
                                  animate={animate} transition={{delay: 0.3, duration: 0.5,}}>
-                        <motion.div className={"text-7xl font-bold"}>
+                        <motion.div className={"text-7xl max-sm:text-5xl font-bold"}>
                             Contact Me
                         </motion.div>
-                        <div className="text-4xl gap-5 flex flex-col " >
+                        <div className="text-4xl  max-sm:text-3xl gap-5 flex flex-col " >
                             Mail
-                            <motion.li className={"text-3xl cursor-pointer"} onClick={()=>handleRedirect("gmail")} whileHover={{scale:0.95}} whileTap={{scale:1.1}}>jantywebdev@gmail.com</motion.li>
+                            <motion.li className={"text-3xl  max-sm:text-2xl cursor-pointer"} onClick={()=>handleRedirect("gmail")} whileHover={{scale:0.95}} whileTap={{scale:1.1}}>jantywebdev@gmail.com</motion.li>
                         </div>
-                        <div className="text-4xl gap-5 flex flex-col " >
+                        <div className="text-4xl  max-sm:text-3xl gap-5 flex flex-col " >
                             Linkedin
-                            <motion.li className={"text-3xl cursor-pointer"} onClick={()=>handleRedirect("linkedin")} whileHover={{scale:0.95}} whileTap={{scale:1.1}}>Gurjant Singh
+                            <motion.li className={"text-3xl  max-sm:text-2xl cursor-pointer"} onClick={()=>handleRedirect("linkedin")} whileHover={{scale:0.95}} whileTap={{scale:1.1}}>Gurjant Singh
                             </motion.li>
                         </div>
-                        <div className="text-4xl gap-5 flex flex-col " >
+                        <div className="text-4xl  max-sm:text-3xl gap-5 flex flex-col " >
                             Github
-                            <motion.li className={"text-3xl cursor-pointer"} onClick={()=>handleRedirect("github")} whileHover={{scale:0.95}} whileTap={{scale:1.1}}>GurjantBains
+                            <motion.li className={"text-3xl  max-sm:text23xl cursor-pointer"} onClick={()=>handleRedirect("github")} whileHover={{scale:0.95}} whileTap={{scale:1.1}}>GurjantBains
                             </motion.li>
                         </div>
                     </motion.div>
@@ -89,8 +89,11 @@ export function Contact() {
 
 const Form = () => {
     const handleSubmit = async (e) => {
-    const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/"
+    // const baseUrl = "http://localhost/API/Portfolio%20Api/Portfolio-Api/"
+        const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
+
     const url = 'api-contact-me.php'
+        console.log(e);
         const result = await fetch(baseUrl + url, {
             method: "POST",
             body: JSON.stringify({
@@ -142,7 +145,6 @@ const Form = () => {
 
 const StyledWrapper = styled.div`
   .form-container {
-    width: 600px;
     background: linear-gradient(#212121, #212121) padding-box,
                 linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
     border: 2px solid transparent;

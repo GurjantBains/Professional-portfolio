@@ -15,30 +15,15 @@ export function SkillHomeComponent(prop) {
                 delay={prop.delay}
             >
 
-            <motion.div className={"skillCard flex z-0 flex-col justify-between  gap-3 items-center bg-white" +
+            <motion.div className={" flex z-0 flex-col justify-between  gap-3 items-center bg-white" +
                 " p-5 rounded-4xl relative overflow-hidden  "}
 
-                        style={{
-                            minHeight:"404px"
 
-                        }}
-            onMouseEnter={()=>{
-                    setImgSize(1.1);
-                    setCardBg("#253092")
-            }}
-                        onMouseLeave={()=>{
-                            setImgSize(1.0);
-                            setCardBg("#bfb2b2")
-                        }}
-            >
+            onMouseEnter={()=>{ setImgSize(1.1);setCardBg("#253092")}}
+                        onMouseLeave={()=>{setImgSize(1.0);setCardBg("#bfb2b2")}}>
 
-
-                <div className={"z-10 p-0 overflow-hidden rounded-4xl place-content-center"}
-                     style={{
-                         backgroundColor:"#e8e7e4",
-                         minHeight:"300px",
-                         minWidth:"300px"
-                     }}
+                <div className={"z-10 p-0 overflow-hidden rounded-4xl place-content-center max-[550px]:min-h-[150px] min-h-[300px]"}
+                     style={{backgroundColor:"#e8e7e4",}}
                 >
                     <motion.img src={prop.image} alt="fg"
 

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {motion} from "motion/react";
 import CustomButton from "@/components/Skills-Home/SkillsHome.jsx";
 
@@ -6,6 +6,10 @@ export default function Project(prop) {
     const [opacity, setOpacity] = useState(0);
     const [leftPosition, setLeftPosition] = useState(0);
     const [rightPosition, setRightPosition] = useState(0);
+    const top = useRef(0);
+    const  top2= useRef(0);
+    const  top3= useRef(0);
+
     const [rotation, setRotation] = useState(0);
     const [middlePos, setMiddlePos] = useState(0);
     const [button, setButton] = useState(-50);
@@ -16,6 +20,58 @@ export default function Project(prop) {
     const [initial, setInitial] = useState({opacity:0,x:-300});
     const [animate, setAnimate] = useState({opacity:1,x:0});
     const [animation, setAnimation] = useState(initial);
+    const [showMobile, setShowMobile] = useState(false)
+    window.addEventListener("resize", (e)=>{
+        if(window.innerWidth>1100){
+            setShowMobile(false)
+        }
+        else{
+            setShowMobile(true)
+
+        }
+
+    })
+    useEffect(() => {
+        if(window.innerWidth>900){
+            setShowMobile(false)
+        }
+        else{
+            setShowMobile(true)
+
+        }
+    })
+
+
+    const onHover = () => {
+        if(showMobile) {return}
+        console.log("hover");
+        if(!canHover)return
+        setOpacity(1);
+        setLeftPosition(-300);
+        setRightPosition(350);
+        setRotation(-30);
+        setMiddlePos(-150)
+        setButton(0)
+        setDisplay("flex")
+        reff.current.style.backgroundImage=`url(${prop.bg})`
+        const mainPos = reff.current.getBoundingClientRect();
+        reff.current.style.backgroundPositionY = mainPos.top*-1 + "px";
+
+    }
+    const onLeave = () => {
+
+        if(!canHover)return
+        setOpacity(0);
+        setLeftPosition(0);
+        setRightPosition(0);
+        setRotation(0)
+        setMiddlePos(0)
+        setButton(-50)
+        setDisplay("none")
+        reff.current.style.backgroundImage=``
+        setCanHover(false)
+        setTimeout(()=>setCanHover(true),300)
+    }
 
 
     // const bg = prop.bg1
@@ -29,34 +85,9 @@ export default function Project(prop) {
                         whileHover={{backgroundColor:"#615f68", scale:1.1}}
                         onViewportEnter={()=>{setAnimation(animate)}}
                         
-            onMouseEnter={() => {
-                if(!canHover)return
-                setOpacity(1);
-                setLeftPosition(-300);
-                setRightPosition(350);
-                setRotation(-30);
-                setMiddlePos(-150)
-                setButton(0)
-                setDisplay("flex")
-                reff.current.style.backgroundImage=`url(${prop.bg})`
-                const mainPos = reff.current.getBoundingClientRect();
-                reff.current.style.backgroundPositionY = mainPos.top*-1 + "px";
-                }}
-                        onMouseLeave={()=>{
-                            if(!canHover)return
-                            setOpacity(0);
-                            setLeftPosition(0);
-                            setRightPosition(0);
-                            setRotation(0)
-                            setMiddlePos(0)
-                            setButton(-50)
-                            setDisplay("none")
-                            reff.current.style.backgroundImage=``
+            onMouseEnter={() => onHover()}
 
-
-                            setCanHover(false)
-                            setTimeout(()=>setCanHover(true),300)
-                        }}
+                        onMouseLeave={()=>{onLeave()}}
             >
 
                 <motion.div
@@ -81,7 +112,8 @@ export default function Project(prop) {
                     opacity: opacity,
                     x:leftPosition,
                     rotate: rotation,
-                    zIndex:opacity
+                    zIndex:opacity,
+                    y:top.current,
                 }} className={"absolute z-0 opacity-0 project-left"}
                             style={{
 
@@ -103,7 +135,9 @@ export default function Project(prop) {
                     opacity: opacity,
                     x:rightPosition,
                     rotate: rotation*-1,
-                    zIndex:opacity
+                    zIndex:opacity,
+                    y:top2.current,
+
                 }} className={"absolute z-0 opacity-0 project-left"}
                             style={{
 
@@ -117,20 +151,23 @@ export default function Project(prop) {
 
                 </motion.div>
             <motion.div
+                className={""}
                 style={{
+                    width:"fit-content",
                     position: "relative",
-                    opacity: 0,
+                    opacity: 1,
+                    placeSelf: "center",
+                    top:10+'px'
+
                 }}
                 animate={{
-                    opacity: opacity,
-                    top:button+"px",
-                    zIndex:opacity
+
+                    // top:button+"px",
                 }}>
                 <CustomButton
                     link={"Projects"}
                     text={"See Details"}
                     classname={"absolute top-0"}
-
                 />
 
             </motion.div>

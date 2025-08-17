@@ -7,9 +7,9 @@ export function About() {
     return (
         <>
             <Navbar/>
-            <div className={"w-full h-[100vh] flex justify-center items-center bg-[#0b0f12]  "}>
+            <div className={"w-full sm:h-[100vh]  flex justify-center items-center bg-[#0b0f12]  "}>
                 <div className={"w-[80%] flex  flex-col bg-[#0f0f14] rounded-[2%]"}>
-                    <div className={"flex p-[10px] content-between"}>
+                    <div className={"flex p-[10px] content-between max-sm:flex-col"}>
                         <div className={"flex flex-[3] flex-col text-4xl p-[20px] font-semibold gap-5 text-center content-center"}> ABOUT ME
                             <div className={"flex  flex-col items-center gap-3"}>
                             <img width={"70%"} alt={""} style={{
@@ -43,10 +43,10 @@ export function About() {
                         </div>
                     </div>
 
-                    <div className={"flex w-full "}>
-                        <div className={"flex flex-[7]  flex-col text-3xl p-10 "}>
+                    <div className={"flex w-full max-sm:flex-col  "}>
+                        <div className={"flex flex-[7] flex-col text-3xl p-10  "}>
                         Interests
-                            <div className={"w-full flex "}>
+                            <div className={"w-full flex  max-sm:flex-wrap"}>
                                 <div className={"flex w-[185px]  flex-col text-3xl p-10"}>
                                 <Interest img={'svg/laravel.svg'} title={"Laravel"} />
                                 </div>
