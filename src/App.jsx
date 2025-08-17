@@ -7,6 +7,7 @@ import {Home} from "./Pages/Home/Home.jsx";
 import {About} from "./Pages/About/About.jsx";
 import  {Skills} from "./Pages/Skills/Skills.jsx";
 import {ProjectDetail} from "@/Pages/Project Detail/ProjectDetail.jsx";
+import {Analytics} from "@vercel/analytics/vue";
 
 
 
@@ -23,7 +24,7 @@ function App() {
           <Route path='/Skills' element={<Skills/>} />
           <Route path='/Projects' element={<Projects />} />
           <Route path='/Projects/:projectid' element={<ProjectDetail />} />
-
+          <Analytics/>
 
       </Routes>
 
