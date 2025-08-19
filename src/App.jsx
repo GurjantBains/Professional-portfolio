@@ -1,7 +1,6 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import './App.css'
-import {Routes, Route, BrowserRouter} from "react-router-dom";
-import {Navbar} from "./components/Navbar/Navbar.jsx";
+import {Routes, Route} from "react-router-dom";
 import {Projects} from "./Pages/Projects/Projects.jsx";
 import {Home} from "./Pages/Home/Home.jsx";
 import {About} from "./Pages/About/About.jsx";

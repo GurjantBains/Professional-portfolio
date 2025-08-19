@@ -1,7 +1,6 @@
 // Circle.jsx
-import React, { useEffect, useRef, useState} from 'react';
+import React, {  useRef, useState} from 'react';
 import {motion,useAnimation} from "motion/react";
-import {animate, cubicBezier} from "motion";
 export function HeroRight() {
     const controls = useAnimation();
     const controls1 = useAnimation();
@@ -28,7 +27,7 @@ export function HeroRight() {
         // setCount((count)=>count + 1);
         // }
         setCount(count => (count + 1) % 3);
-            console.log(count);
+
            if(!mainCircleInView.current)return;
             // Move left
         await controls.start({
@@ -90,7 +89,7 @@ export function HeroRight() {
 
         // Wait
         await new Promise(res => setTimeout(res, 2000));
-            animateCircle();
+            await animateCircle();
         }
 
 
@@ -102,7 +101,7 @@ export function HeroRight() {
                            }}
                            onViewportEnter={()=>{
                                mainCircleInView.current= true
-                                animateCircle();
+                                animateCircle().then();
                            }}
                            onViewportLeave={()=>{
                                mainCircleInView.current=false

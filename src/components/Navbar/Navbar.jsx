@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
 import './Navbar.css';
 import { motion } from "motion/react"
@@ -64,7 +64,7 @@ const Checkbox = (prop) => {
     return (
         <StyledWrapper className={`${prop.open?"":"p-4"} ${prop.visibility?"":"hidden"}`}>
             <label className="burger" htmlFor="burger" >
-                <input type="checkbox" id="burger" onClick={()=>{prop.setOpen(!prop.open);console.log(prop.open)}} />
+                <input type="checkbox" id="burger" onClick={()=>{prop.setOpen(!prop.open);}} />
                 <span />
                 <span />
                 <span />

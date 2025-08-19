@@ -1,6 +1,5 @@
 import {motion} from "motion/react";
-import {react ,useState} from "react"
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {toast, ToastContainer} from "react-toastify";
 
@@ -25,7 +24,7 @@ export function Contact() {
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const linkedinUrl = `https://www.linkedin.com/in/gurjant-singh-97926518a/`;
     const githubUrl = `https://github.com/GurjantBains`;
-            console.log(e);
+
     switch (e) {
         case "linkedin":
             window.open(linkedinUrl, "_blank");
@@ -45,7 +44,7 @@ export function Contact() {
     return (
         <><div className={"contact-Home-container  w-full flex flex-col justify-evenly "}>
             <div className={"gap-20 flex flex-col justify-center w-full place-self-center p-10"}>
-                <div className={"contact-Home-Form-container flex max-xl:flex-col justify-evenly place-items-center gap-3 max-xl:gap-10"}>
+                <div className={"contact-Home-Form-container flex max-xl:flex-col justify-evenly place-items-center gap-3 max-xl:gap-30"}>
                     <motion.div  style={{...initial,...{transformOrigin:`left`,}}}
                                  className={"flex flex-col gap-10"}
                                  onViewportEnter={()=>{setAnimate(animation)}}
@@ -93,7 +92,7 @@ const Form = () => {
         const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
 
     const url = 'api-contact-me.php'
-        console.log(e);
+        ;
         const result = await fetch(baseUrl + url, {
             method: "POST",
             body: JSON.stringify({
@@ -106,8 +105,8 @@ const Form = () => {
             mode:"cors",
         })
         const data = await result.json()
-        console.log(e)
-        console.log(data)
+        
+        
         if(data.status === 'success'){
             toast("Message successfully sent")
         }else{
@@ -252,7 +251,7 @@ export const Button = (prop) => {
         const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         const linkedinUrl = `https://www.linkedin.com/in/gurjant-singh-97926518a/`;
         const githubUrl = `https://github.com/GurjantBains`;
-        console.log(e);
+
         switch (e) {
             case "linkedin":
                 window.open(linkedinUrl, "_blank");

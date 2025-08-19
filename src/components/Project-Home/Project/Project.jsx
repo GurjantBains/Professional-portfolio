@@ -8,7 +8,6 @@ export default function Project(prop) {
     const [rightPosition, setRightPosition] = useState(0);
     const top = useRef(0);
     const  top2= useRef(0);
-    const  top3= useRef(0);
 
     const [rotation, setRotation] = useState(0);
     const [middlePos, setMiddlePos] = useState(0);
@@ -44,7 +43,7 @@ export default function Project(prop) {
 
     const onHover = () => {
         if(showMobile) {return}
-        console.log("hover");
+
         if(!canHover)return
         setOpacity(1);
         setLeftPosition(-300);

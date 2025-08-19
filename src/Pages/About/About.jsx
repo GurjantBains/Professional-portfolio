@@ -1,5 +1,5 @@
 import {Navbar} from "../../components/Navbar/Navbar.jsx";
-import {motion, useAnimation} from "motion/react";
+import {motion} from "motion/react";
 import React from 'react';
 
 

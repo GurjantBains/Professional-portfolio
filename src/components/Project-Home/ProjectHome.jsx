@@ -1,5 +1,4 @@
 import Project from "./Project/Project.jsx";
-import GradientText from "@/blocks/TextAnimations/GradientText/GradientText.jsx";
 import CustomButton from "@/components/Skills-Home/SkillsHome.jsx";
 import React, {useRef} from "react";
 
@@ -15,17 +14,11 @@ export function ProjectHome() {
              style={{
                  color: "#ffa500",
              }}><b>
-                 <GradientText
-                     colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                     animationSpeed={3}
-                     showBorder={false}
-                     className="custom-class"
-                 >
-                 </GradientText>
+
                  Projects
              </b>
              </div>
-             <div className={"projects w-full flex flex-col lg:p-20 py-30 gap-100"}>
+             <div className={"projects w-full flex flex-col lg:p-20 py-30 min-[1100px]:gap-30 gap-10"}>
                  <Project  title={"Portfolio"}
                            desc={"My professional Portfolio Website"}
                            tags={["Front-End","Back-end","Full-Stack","Mysql SQL","PHP","React","Tailwind CSS"]}

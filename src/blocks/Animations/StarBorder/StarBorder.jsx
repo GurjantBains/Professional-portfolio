@@ -30,7 +30,7 @@ const StarBorder = ({
             }}}}
             onViewportEnter={()=>{
                 setAnimation(animate)
-                console.log(delay)
+                
             }}
             className={`relative inline-block overflow-hidden rounded-[20px] ${className} `}
             style={{

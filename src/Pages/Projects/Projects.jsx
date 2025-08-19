@@ -15,11 +15,11 @@ export function Projects() {
     useEffect(()=>{
         async function fetchCode(){
             const data = await fetch(`${baseUrl}api-fetch-projects.php` )
-            console.log(" fetching data")
+            
             return await data.json()}
         // return await data}
         fetchCode().then(data => {
-            console.log(data)
+            
             setProjects(data)
         })
     },[])
@@ -42,7 +42,7 @@ export function Projects() {
                         " gap-25   rounded-2xl sm:p-15 max-sm:p-10 "}>
 
                     {
-                        projects?.length>0?projects.map((e,i)=>{return <ProjectCard projectid={e.id}  title={e.name} key={i} img={e.mainImage} desc={e.description} />}):console.log("projects")
+                        projects?.length>0?projects.map((e,i)=>{return <ProjectCard projectid={e.id}  title={e.name} key={i} img={e.mainImage} desc={e.description} />}):""
                     }
 
 
@@ -66,7 +66,7 @@ const ProjectCard = (prop) => {
             {/*<motion.div className={"ProjectCard mb-[20px] max-w-[400px] min-w-[200px] h-fit  relative flex flex-col   overflow-hidden border-zinc-700  bg-zinc-800 rounded-2xl cursor-pointer box-border z-1 "}*/}
             {/*            initial={initial}*/}
             {/*            animate={animate}*/}
-            {/*            onViewportEnter={()=>{setAnimate(animation);console.log("dd")}}*/}
+            {/*            onViewportEnter={()=>{setAnimate(animation);}}*/}
             {/*            transition={{duration:0.5,delay:0.1+(prop.keys/10)}}*/}
 
             {/*            // viewport={{once:true}}*/}
@@ -105,7 +105,7 @@ const ProjectFilter = (prop) => {
     const tap = {scale:0.9}
     const setFilter = (filter) => {
         prop.setActive(filter)
-        console.log(prop.active)
+        
     }
     return (
         <>

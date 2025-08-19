@@ -31,10 +31,10 @@ export function ProjectDetail() {
         }
          fetchDetails().then(r => {
              setLoading(false);
-             console.log(r);
+
              if(r.message){
                  setNotFound(r.message)
-                 console.log(r.message)
+                 
              }
              else {
              setProjectDetails(r)
@@ -58,7 +58,7 @@ export function ProjectDetail() {
     }, [projectDetails]);
 
     function retryF(){
-        console.log("retrying");
+
         setRetry(retry*-1);
         setError(false)
         setNotFound(false)
@@ -160,7 +160,7 @@ const ProjectCodePage = (prop) => {
           setMobile(true)
 
       }
-      console.log(mobile)
+      
   },[])
 
 
@@ -228,7 +228,7 @@ const ProjectCode = (prop) => {
 
            }
        }catch(err){
-           console.log(err)
+           
            setHighlightedCode("Could Not Load Code")
        }finally {
            if (isMounted){setIsLoading(false)}
@@ -236,7 +236,7 @@ const ProjectCode = (prop) => {
        }
 
     }
-    getCode();
+    getCode().then();
 
     return ()=>{isMounted = false}
     }, [prop.url]);
@@ -335,8 +335,8 @@ const ProjectNotFound =(prop) => {
 
 const MobileCodeLoader = (prop) => {
     const active = useRef(prop.name[prop.active]);
-    console.log(prop.name[prop.active]);
-    console.log(active)
+
+    
     return (
         <>
             <select className={"p-4 border-1 text-xl rounded-lg mx-auto mb-10   "} value={active.current} onChange={(e)=>{prop.setAC(e.target.value)}}>

@@ -1,7 +1,5 @@
-// import {react} from "react";
 import {motion} from "motion/react";
 import {useRef, useState} from "react";
-import {scale} from "motion";
 import Card from "@/Pages/Skills/components/Skill Container/Card.jsx";
 
 export function Skill() {

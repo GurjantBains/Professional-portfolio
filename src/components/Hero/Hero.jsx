@@ -1,7 +1,5 @@
 import {motion} from "motion/react";
-import {use, useState} from "react";
 import TextType from "../../blocks/TextAnimations/TextType/TextType.jsx";
-import GradientText from "@/blocks/TextAnimations/GradientText/GradientText.jsx";
 import {HeroRight} from "@/components/Hero/Hero-Components/HeroRight.jsx";
 
 export function Hero() {
