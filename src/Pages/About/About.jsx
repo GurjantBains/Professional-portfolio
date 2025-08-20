@@ -1,18 +1,33 @@
 import {Navbar} from "../../components/Navbar/Navbar.jsx";
 import {motion} from "motion/react";
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {Button} from "@/components/Contact/Contact.jsx";
 
 
 export function About() {
+    const [mobile, setMobile] = useState(()=>{
+        return window.innerWidth < 900;
+    });
+    const handleResize = () => {
+        setMobile(()=>{return window.innerWidth < 900})
+    }
+
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize)
+        return () => {
+            window.removeEventListener("resize", handleResize)
+        }
+    }, []);
     return (
         <>
             <Navbar/>
-            <div className={"w-full sm:h-[100vh]  flex justify-center items-center bg-[#0b0f12]  "}>
-                <div className={"w-[80%] flex  flex-col bg-[#0f0f14] rounded-[2%]"}>
-                    <div className={"flex p-[10px] content-between max-sm:flex-col"}>
-                        <div className={"flex flex-[3] flex-col text-4xl p-[20px] font-semibold gap-5 text-center content-center"}> ABOUT ME
+            <div className={"w-full min-[900]:h-[100vh]  flex justify-center items-center bg-[#0b0f12]   "}>
+                <div className={"sm:w-[80%] w-full flex  flex-col bg-[#0f0f14] rounded-[2%] "}>
+                    <div className={"flex p-[10px] content-between max-[900px]:flex-col "}>
+                        <div className={"flex flex-[3] flex-col text-2xl lg:text-4xl p-[20px] font-semibold gap-5 text-center content-center "}> ABOUT ME
                             <div className={"flex  flex-col items-center gap-3"}>
-                            <img width={"70%"} alt={""} style={{
+                            <img className={"w-[80%] sm:w-[70%] lg:w-[50%] xl:w-[70%]"} alt={""} style={{
                                 borderRadius: "50%",
                             }} src={"Profile.png"}/>
                             <div className={"text-lg"}>
@@ -20,17 +35,17 @@ export function About() {
                             </div>
                         </div></div>
                         <div className={"flex-[1]"}></div>
-                        <div className={"flex flex-[7] flex-col p-[25px]"}>
-                            <div className={"grid gap-2"}>
+                        <div className={"flex flex-[7] flex-col p-[25px] max-lg:text-center"}>
+                            <div className={"grid gap-2 max-lg:items-center"}>
                                 <div >
                                     <div className={"text-3xl mb-10"}>Hi I'm Gurjant Singh</div>
                                     <div className={"text-xl text-gray-300"}>I am a Full Stack Web Stack Web Developer</div>
                                 </div>
                                     <div className={"text-lg text-gray-300"}>I can make your Websites Dynamic <br/> and beautiful </div>
                             </div>
-                            <div className={"w-[90%] border-[1px] border-[#36415338] mx-auto mt-[30px] mb-[30px]"}style={{color:"rgba(54,65,83,0.22)"}}></div>
-                            <div className={"flex flex-col  gap-3"}>
-                                <div className={"text-3xl text-left w-full font-semibold"}>
+                            <div className={"w-[90%] border-[1px] border-[#36415338] mx-auto mt-[30px] mb-[30px]"} style={{color:"rgba(54,65,83,0.22)"}}></div>
+                            <div className={"flex flex-col  gap-3 max-lg:items-center  "}>
+                                <div className={"text-3xl text-left  max-lg:text-center font-semibold"}>
                                     Skills
                                 </div>
                                 <SkillLevel title={"Html"} number={90}/>
@@ -43,10 +58,10 @@ export function About() {
                         </div>
                     </div>
 
-                    <div className={"flex w-full max-sm:flex-col  "}>
-                        <div className={"flex flex-[7] flex-col text-3xl p-10  "}>
+                    <div className={"flex w-full max-[900px]:flex-col    "}>
+                        <div className={"flex flex-[7] flex-col text-5xl p-10 max-lg:items-center gap-4 "}>
                         Interests
-                            <div className={"w-full flex  max-sm:flex-wrap"}>
+                            <div className={"w-full flex  max-sm:flex-wrap justify-center"}>
                                 <div className={"flex w-[185px]  flex-col text-3xl p-10"}>
                                 <Interest img={'svg/laravel.svg'} title={"Laravel"} />
                                 </div>
@@ -59,8 +74,12 @@ export function About() {
 
                             </div>
                         </div>
-                        <div className={"flex-[5] flex justify-end pr-16 items-center "}>
-                            <ContactShort/>
+                        <div className={"flex-[5] flex justify-end pr-16 items-center place-self-center "}>
+                            {
+                                !mobile?<ContactShort/>:<Button/>
+
+                            }
+
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
 import './Navbar.css';
 import { motion } from "motion/react"
@@ -16,28 +16,41 @@ export function Navbar() {
         }
     });
     const location = useLocation();
-    const [pageName,setPageName] = useState(location.pathname ==="/About")
-    if(pageName === false){
-        if(window.innerWidth<900){
-            setPageName ( true)
-        }
-    }
+    const [pageName,setPageName] = useState(()=>{return location.pathname === "/About"})
+    const [open, setOpen] = useState(false);
+
     window.addEventListener("resize",()=>{
         if(pageName === false){
-            if(window.innerWidth<900){
+            if(location.pathname === "/About"){
+                setPageName(true)
+            }
+            else if(window.innerWidth<900){
                 setPageName ( true)
             }
             else {
                 setPageName (false)
             }
-
         }
     })
-    const [open, setOpen] = useState(false);
+    useEffect(() => {
+        if(location.pathname === "/About"){
+            setPageName(true)
+        }
+        else if(window.innerWidth<900){
+                setPageName ( true)
+        }
+        else{
+            setPageName (false)
+        }
+        setOpen(false)
+
+    }, [location.pathname]);
 
     return (
         <>
-            <motion.div className={`flex nav-con items-center ${pageName?"flex-col pt-7 bg-[#d9d8d4] fixed overflow-hidden ":" w-[98%] absolute p-8  justify-center"} r z-999 
+            <motion.div
+
+                className={`flex nav-con items-center ${pageName?"flex-col pt-7 bg-[#d9d8d4] fixed overflow-hidden ":" w-[98%] absolute p-8  justify-center"} r z-999 
             ${open?" h-[100%]  ":" justify-center rounded-[50%] w-[80px] h-[80px] m-[10px] ml-[20px] `"}
             ` } id={"navBar"}>
             <Checkbox setOpen={setOpen} open={open} visibility={pageName}/>

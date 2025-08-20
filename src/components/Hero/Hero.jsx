@@ -10,14 +10,14 @@ export function Hero() {
 
                     <div className={"heroText text-2xl "}>
                         Hey I am <br/>
-                        <b style={{color:"#C6CAED",fontSize:50}} className={"font-extrabold "}>Gurjant Singh</b>
+                        <b style={{color:"#C6CAED",fontSize:50}} className={"font-extrabold text-3xl sm:text-4xl lg:text-7xl "}>Gurjant Singh</b>
                     </div>
-                     <div className={"heroTitle pl-10 max-sm:text-5xl"}>
-                    <TextType text={["Frontend","Backend","Full-Stack"]}
+                     <div className={"heroTitle pl-10 text-4xl lg:text-7xl font-bold"}>
+                    <TextType text={["Frontend","Backend","Full-Stack","React JS","Javascript",""]}
                               textColors={["white","#C9F299",]}
                               startOnVisible={true}
                               initialDelay={1000}
-                              className={"max-sm:text-5xl"}
+                              className={""}
 
 
                     /> <br/>   Developer

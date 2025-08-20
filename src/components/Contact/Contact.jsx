@@ -44,7 +44,7 @@ export function Contact() {
     return (
         <><div className={"contact-Home-container  w-full flex flex-col justify-evenly "}>
             <div className={"gap-20 flex flex-col justify-center w-full place-self-center p-10"}>
-                <div className={"contact-Home-Form-container flex max-xl:flex-col justify-evenly place-items-center gap-3 max-xl:gap-30"}>
+                <div className={"contact-Home-Form-container flex max-xl:flex-col justify-between place-items-center gap-3 sm:p-20 max-xl:gap-30"}>
                     <motion.div  style={{...initial,...{transformOrigin:`left`,}}}
                                  className={"flex flex-col gap-10"}
                                  onViewportEnter={()=>{setAnimate(animation)}}
@@ -69,7 +69,7 @@ export function Contact() {
                     </motion.div>
 
                         <motion.div style={{...initial,...{transformOrigin:`right`,}}}
-                        className={""}
+                        className={"xl:w-[50%] max-xl:w-[70%] max-sm:w-full  "}
                         onViewportEnter={()=>{setAnimate(animation)}}
                         animate={animate}
                         transition={{delay: 0.3, duration: 0.5,}}>
@@ -92,7 +92,7 @@ const Form = () => {
         const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
 
     const url = 'api-contact-me.php'
-        ;
+
         const result = await fetch(baseUrl + url, {
             method: "POST",
             body: JSON.stringify({

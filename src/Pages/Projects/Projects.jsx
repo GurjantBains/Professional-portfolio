@@ -2,31 +2,39 @@ import {Navbar} from "../../components/Navbar/Navbar.jsx";
 import {motion} from "motion/react";
 import {useEffect, useState} from "react";
 import CustomButton from "@/components/Skills-Home/SkillsHome.jsx";
+import Loader from "@/components/Loader/Loader.jsx";
+import {Button} from "@/components/Contact/Contact.jsx";
 
 
 export function Projects() {
     window.scrollTo(0, 0);
     const [projects, setProjects] = useState([]);
+    const [activeFilter, setActiveFilter] = useState("all");
+    const [loading, setLoading] = useState(true);
     // const baseUrl = "http://localhost/API/Portfolio%20Api/Portfolio-Api/"
     const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
 
 
-    
+
+
     useEffect(()=>{
         async function fetchCode(){
             const data = await fetch(`${baseUrl}api-fetch-projects.php` )
-            
+
             return await data.json()}
         // return await data}
         fetchCode().then(data => {
-            
+
             setProjects(data)
+            setLoading(false);
         })
     },[])
-    const [activeFilter, setActiveFilter] = useState("all");
     return (
         <>
                 <Navbar />
+            {
+                loading && <Loader />
+            }
             <div className={"w-full  flex place-content-center pt-[100px] bg-zinc-900 min-h-[100vh]"}>
 
                 <div className={" w-[90%] sm:pt-10" }>
@@ -40,15 +48,13 @@ export function Projects() {
                         " sm:grid-cols-[repeat(auto-fill,minmax(275px,1fr))] "+
                         " max-sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] " +
                         " gap-25   rounded-2xl sm:p-15 max-sm:p-10 "}>
-
                     {
-                        projects?.length>0?projects.map((e,i)=>{return <ProjectCard projectid={e.id}  title={e.name} key={i} img={e.mainImage} desc={e.description} />}):""
+                        !loading?projects?.length>0?projects.map((e,i)=>{return <ProjectCard projectid={e.id}  title={e.name} key={i} img={e.mainImage} desc={e.description} />}):"":""
                     }
-
-
-
                     </div>
-
+                    <div className={"mt-20"}>
+                <Button />
+                    </div>
                 </div>
 
             </div>
@@ -63,29 +69,11 @@ const ProjectCard = (prop) => {
     const [animate, setAnimate] = useState(initial);
     return (
         <>
-            {/*<motion.div className={"ProjectCard mb-[20px] max-w-[400px] min-w-[200px] h-fit  relative flex flex-col   overflow-hidden border-zinc-700  bg-zinc-800 rounded-2xl cursor-pointer box-border z-1 "}*/}
-            {/*            initial={initial}*/}
-            {/*            animate={animate}*/}
-            {/*            onViewportEnter={()=>{setAnimate(animation);}}*/}
-            {/*            transition={{duration:0.5,delay:0.1+(prop.keys/10)}}*/}
 
-            {/*            // viewport={{once:true}}*/}
-            {/*>*/}
-            {/*    <div className={"z-3 bg-zinc-800 w-full ProjectCardc h-fit"}>*/}
-
-            {/*    <div className={"z-3 p-[25px]"}><img src={prop.img} className={"rounded-2xl spect-video object-cover "} alt={"Bye bye"}/></div>*/}
-            {/*    <div className={"z-5 bg-[#0c1013] p-[20px] overflow-hidden top-[-35px]  h-[250px] relative"}>*/}
-            {/*        <div className={"z-3 text-4xl mb-2 text-blue-500"}>{prop.title}</div>*/}
-            {/*        <div className={"z-3 text-lg text-gray-400 mb-5 line-clamp-2"}>{prop.desc}</div>*/}
-            {/*        <div className={"place-self-center"}><CustomButton text={"See Detail"} link={"Projects/"+prop.projectid}/></div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-            {/*</motion.div>*/}
             <motion.div>
                 <div className={" prC flex flex-col  aspect-square border-1 rounded-2xl   border-zinc-700 bg-zinc-800 p-5 hover:scale-[1.05] duration-250 cursor-pointer"}>
                     <div className={"flex relative overflow-hidden w-[inherit]"}>
-                        <img src={prop.img} className={"rounded-2xl relative"} alt={""} />
+                        <img src={prop.img} className={"rounded-2xl relative aspect-video object-cover"} alt={""} />
                     </div>
                     <div>
                         <div className={"z-3 text-4xl mb-2 text-blue-500"}>{prop.title}</div>
