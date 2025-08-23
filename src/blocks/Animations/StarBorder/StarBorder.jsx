@@ -33,16 +33,21 @@ const StarBorder = ({
         <motion.div
             whileHover={{
                 boxShadow:`0px 0px 179px 78px ${shadow}`,
-                scale:1.1
+                scale:1.1,
+                transition:{
+                    duration:0.1,
+                    delay:0,
+                }
             }}
             initial={initial}
             transition={{
-                delay:mobile?0.3:delay,
+                // delay:mobile?0.3:delay,
             }}
 
             whileInView={animate}
             viewport={{
                 once: true,
+
             }}
             onViewportEnter={()=>{
                 // setAnimation(animate)
@@ -67,6 +72,10 @@ const StarBorder = ({
                 whileHover={{
                     boxShadow:`0px 0px 179px 78px white`
                 }}
+                transition={{
+                    delay:0,
+                }}
+
                 className="absolute w-[300%] h-[50%] opacity-70 top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0"
                 style={{
                     background: `radial-gradient(circle, ${color}, transparent 10%)`,
