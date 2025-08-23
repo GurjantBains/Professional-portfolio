@@ -1,5 +1,5 @@
 import {motion} from "motion/react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const StarBorder = ({
                         as: Component = "button",
@@ -12,9 +12,20 @@ const StarBorder = ({
                         delay,
                         ...rest
                     }) => {
-    const [initial, setInitial] = useState({opacity:0,x:-100});
+    const [mobile, setMobile] = useState(()=> {
+        return window.innerWidth <= 1040
+    });
+    const handleResize = () => {
+        setMobile(()=> window.innerWidth <= 1040)
+    }
+    const [initial, setInitial] = useState({opacity:0,x:-50});
     const [animate, setAnimate] = useState({opacity:1,x:0});
-    const [animation, setAnimation] = useState(initial);
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
+    }, []);
 
     return (
 
@@ -24,12 +35,17 @@ const StarBorder = ({
                 boxShadow:`0px 0px 179px 78px ${shadow}`,
                 scale:1.1
             }}
-            animate={{...animation,...{transition:{
-                delay:delay,
-                        duration:1
-            }}}}
+            initial={initial}
+            transition={{
+                delay:mobile?0.3:delay,
+            }}
+
+            whileInView={animate}
+            viewport={{
+                once: true,
+            }}
             onViewportEnter={()=>{
-                setAnimation(animate)
+                // setAnimation(animate)
                 
             }}
             className={`relative inline-block overflow-hidden rounded-[20px] ${className} `}

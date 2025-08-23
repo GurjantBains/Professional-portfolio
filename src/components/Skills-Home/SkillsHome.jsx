@@ -3,18 +3,10 @@ import {SkillHomeComponent} from "./Skill Components/SkillHomeComponent.jsx";
 import {motion} from "motion/react";
 
 export function SkillsHome() {
-    const [initial, setInitial] = useState({opacity:0.8,scaleY:0.2});
-    const [animate, setAnimate] = useState({opacity:1,scaleY:1});
-    const [animation, setAnimation] = useState(initial);
     return (
         <>
             <motion.div
-                onViewportEnter={()=>{
-                    setAnimation(animate);
-                }}
-                animate={animation}
-                style={{...initial,...{transformOrigin:"top center"}}}
-                transition={{duration:1}}
+
                 className={"w-full min-[500px]:p-10 skillHome"} >
                 <div className={"skill-home-heading text-center rounded-[20px] overflow-hidden"}
                 style={{
@@ -29,38 +21,38 @@ export function SkillsHome() {
                                         title="Html 5"
                                         desc="Html 5"
                                         color={"#E44D26"}
-                                        delay={0.8}
+                                        delay={0.3}
 
                     />
                     <SkillHomeComponent image="Css.png"
                                         title="Css 3"
                                         desc="Css 3"
                                         color={"#264DE4"}
-                                        delay={0.9}
+                                        delay={0.4}
 
                     />
                     <SkillHomeComponent image="Js.png"
                                         title="Javascript"
                                         desc="Javascript "
                                         color={"#F0DB4F"}
-                                        delay={1}
+                                        delay={0.5}
                     />
                     <SkillHomeComponent image="react.png"
                                         title="React Js"
                                         desc="Javascript "
                                         color={"#61DBFB"}
-                                        delay={1.1}
+                                        delay={0.6}
                     />
                     <SkillHomeComponent image="php.png"
                                         title="PHP"
                                         desc="Javascript "
                                         color={"#8993BE"}
-                                        delay ={1.2}
+                                        delay ={0.7}
                     />
 
 
                 </div>
-                <motion.div style={{maxWidth:"160px", placeSelf:"center"}} animate={animation} initial={initial}>
+                <motion.div style={{maxWidth:"160px", placeSelf:"center"}} >
                 <CustomButton link={"Skills"} text={"Read More"} style={{
                 }} />
                 </motion.div>
