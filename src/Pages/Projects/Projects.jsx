@@ -11,10 +11,10 @@ export function Projects() {
     const [projects, setProjects] = useState([]);
     const [activeFilter, setActiveFilter] = useState(-1);
     const [loading, setLoading] = useState(true);
-    const baseUrl = "http://localhost/API/Portfolio%20Api/Portfolio-Api/"
     const allProjects = useRef([]);
     const filteredData = useRef([]);
-    // const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
+    // const baseUrl = "http://localhost/API/Portfolio%20Api/Portfolio-Api/"
+    const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
 
 
 
