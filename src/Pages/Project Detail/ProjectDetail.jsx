@@ -80,7 +80,19 @@ export function ProjectDetail() {
                         {
                             projectDetails?.length>0?projectDetails[0].name:""
                         }
+
                     </motion.div>
+                    <div className={"w-full flex justify-end"}>
+                        {projectDetails?.length>0?
+                            projectDetails[0].projectUrl!==null && projectDetails[0].projectUrl!==undefined && projectDetails[0].projectUrl !== "example.com" ?
+                                <a href={projectDetails[0].projectUrl}
+                                className={"ml-20 text-xl bg-gray-600 p-3 place-self-end rounded-lg hover:scale-[1.05] duration-200 hover:bg-gray-900 hover:text-shadow-white"}
+                                   target="_blank"
+
+                                >See Project
+                                </a>
+                                :"":""}
+                    </div>
                     {
                         sections.length>0?sections.map((e,i)=>{
                             return <ProjectDescription title={e[0]} desc={e[1]} key={i} img={e[2]}/>
