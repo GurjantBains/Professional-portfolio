@@ -19,14 +19,7 @@ export function ProjectDetail() {
 
     useEffect(()=>{
         async function fetchDetails(){
-        const result = await fetch(baseUrl+"api-fetch-project.php",{
-            method:"POST",
-            mode:"cors",
-            headers:{'content-type':'application/json'},
-            body:JSON.stringify({
-                id: projectid,
-            })
-        })
+        const result = await fetch(baseUrl+"project/"+projectid)
             return (await result).json()
         }
          fetchDetails().then(r => {

@@ -21,13 +21,15 @@ export function Projects() {
 
     useEffect(()=>{
         async function fetchCode(){
-            const data = await fetch(`${baseUrl}api-fetch-projects.php`,{
-                method: "POST",
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify({'filter': activeFilter??"-1"})
-            } )
+            if (activeFilter === -1){
+            const data = await fetch(`${baseUrl}projects`)
+            return await data.json()
+            }else{
+                const data = await fetch(`${baseUrl}projects/${activeFilter}`);
+            return await data.json()
+            }
+    }
 
-            return await data.json()}
         // return await data}
         fetchCode().then(data => {
             allProjects.current = data;
@@ -107,7 +109,7 @@ const ProjectFilter = (prop) => {
         prop.setActive(filter)
     }
     const fetchFilters = async () => {
-        const result = await fetch(prop.url+"api-read-tags.php")
+        const result = await fetch(prop.url+"tags")
         return await result.json();
     }
     useEffect(() => {
