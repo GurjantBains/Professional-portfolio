@@ -91,19 +91,12 @@ const Form = () => {
     // const baseUrl = "http://localhost/API/Portfolio%20Api/Portfolio-Api/"
         const baseUrl = "https://portfolio-api-c2uc.onrender.com/"
 
-    const url = 'api-contact-me.php'
+    const url = 'message'
 
         const result = await fetch(baseUrl + url, {
             method: "POST",
-            body: JSON.stringify({
-                email: e.get("email"),
-                name: e.get("name"),
-                message: e.get("message"),
-
-            }),
-            headers: {'content-type': 'application/json'},
-            mode:"cors",
-        })
+            body: JSON.stringify({email: e.get("email"), name: e.get("name"), message: e.get("message"),}),
+            headers: {'content-type': 'application/json'},})
         const data = await result.json()
         
         
