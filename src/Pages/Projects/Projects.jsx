@@ -58,7 +58,14 @@ export function Projects() {
                         " gap-25   rounded-2xl sm:p-15 max-sm:p-10 "}>
                     {
                         !loading?projects?.length>0?
-                            projects.map((e,i)=>{return <ProjectCard projectid={e.id}  title={e.name} key={i} img={e.mainImage} desc={e.description} />}):"":
+                            projects.map((e,i)=>{
+                                return <ProjectCard
+                                    projectid={e.id}
+                                    title={e.name}
+                                    key={i}
+                                    img={e.mainimage.replace('/\\//g',"/")}
+                                    desc={e.description} />
+                            }):"":
                             ""
                     }
                         {

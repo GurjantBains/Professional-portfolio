@@ -30,9 +30,9 @@ export function About() {
                             <img className={"w-[80%] sm:w-[70%] lg:w-[50%] xl:w-[70%]"} alt={""} style={{
                                 borderRadius: "50%",
                             }} src={"Profile.png"}/>
-                            <div className={"text-lg"}>
-                            Gurjant Singh
-                            </div>
+                                <div className={"text-lg"}>Gurjant Singh</div>
+                                <div className={"text-sm"}>This Image is<br/> AI Generated  </div>
+
                         </div></div>
                         <div className={"flex-[1]"}></div>
                         <div className={"flex flex-[7] flex-col p-[25px] max-lg:text-center"}>
