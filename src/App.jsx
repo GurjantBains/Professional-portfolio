@@ -12,8 +12,8 @@ import {Analytics} from "@vercel/analytics/react";
 function App() {
     useEffect(() => {
         document.title = "Gurjant's Portfolio"
+        fetch('https://portfolio-api-c2uc.onrender.com');
     }, []);
-
 
 
     return (

@@ -56,6 +56,7 @@ export function Projects() {
                         " sm:grid-cols-[repeat(auto-fill,minmax(275px,1fr))] "+
                         " max-sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] " +
                         " gap-25   rounded-2xl sm:p-15 max-sm:p-10 "}>
+                        {}
                     {
                         !loading?projects?.length>0?
                             projects.map((e,i)=>{
@@ -87,13 +88,36 @@ const ProjectCard = (prop) => {
     const [initial, setInitial] = useState({x:-100,opacity:0});
     const [animation, setAnimation] = useState({x:0,opacity:1});
     const [animate, setAnimate] = useState(initial);
+    const [isLoaded, setIsLoaded] = useState(false);
     return (
         <>
 
             <motion.div>
                 <div className={" prC flex flex-col  aspect-square border-1 rounded-2xl   border-zinc-700 bg-zinc-800 p-5 hover:scale-[1.05] duration-250 cursor-pointer"}>
                     <div className={"flex relative overflow-hidden w-[inherit]"}>
-                        <img src={prop.img} className={"rounded-2xl relative aspect-video object-cover"} alt={""} />
+                        <div className="relative aspect-video">
+                            {/* Default image - fades out when main image loads */}
+                            <img
+                                src={'ProjectDefault.png'}
+                                className={`rounded-2xl object-cover w-full h-full transition-opacity duration-300 ${
+                                    isLoaded ? 'opacity-0' : 'opacity-100'
+                                }`}
+                                alt=""
+                            />
+
+                            {/* Main image - fades in when loaded */}
+                            {prop.img && (
+                                <img
+                                    src={prop.img}
+                                    className={`rounded-2xl object-cover w-full h-full absolute top-0 left-0 transition-opacity duration-300 ${
+                                        isLoaded ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                    alt=""
+                                    onLoad={() => setIsLoaded(true)}
+                                />
+                            )}
+                        </div>
+                        {/*<img src={'ProjectDefault.png'} className={"rounded-2xl relative aspect-video object-cover"} alt={""} />*/}
                     </div>
                     <div>
                         <div className={"z-3 text-4xl mb-2 text-blue-500"}>{prop.title}</div>

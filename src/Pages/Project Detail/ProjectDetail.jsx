@@ -114,6 +114,8 @@ export function ProjectDetail() {
 const ProjectDescription  = (prop) => {
     // const baseUrl = "http://localhost/API's/Portfolio%20Api/Portfolio-Api/Public"
     const baseUrl = "https://portfolio-api-c2uc.onrender.com/Public"
+    const [imageError, setImageError] = useState(false);
+
 
 
     return (
@@ -123,8 +125,8 @@ const ProjectDescription  = (prop) => {
                 <div className={"text-gray-300"}>
                 {prop.desc}
                 </div>
-                {prop.img!==undefined?
-                <img src={prop.img} alt={"ss"} width={"70%"} className={"place-self-center mt-5"}/>:""
+                {prop.img!==undefined && !imageError ?
+                <img src={prop.img}  alt={""} onError={()=>setImageError(true)} width={"70%"} className={"place-self-center mt-5"}/>:""
                 }
             </motion.div>
 
