@@ -64,7 +64,7 @@ export function Projects() {
                                     projectid={e.id}
                                     title={e.name}
                                     key={i}
-                                    img={e.mainimage.replace('/\\//g',"/")}
+                                    img={e?.mainimage?.replace('/\\//g',"/")}
                                     desc={e.description} />
                             }):"":
                             ""
