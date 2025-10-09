@@ -106,9 +106,9 @@ const ProjectCard = (prop) => {
                             />
 
                             {/* Main image - fades in when loaded */}
-                            {prop.img && (
+                            {prop?.img && (
                                 <img
-                                    src={prop.img}
+                                    src={prop?.img}
                                     className={`rounded-2xl object-cover w-full h-full absolute top-0 left-0 transition-opacity duration-300 ${
                                         isLoaded ? 'opacity-100' : 'opacity-0'
                                     }`}
